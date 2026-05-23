@@ -128,6 +128,8 @@
   .spec:hover svg{animation:beat 1s ease}
   .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
   .tag{font-size:.74rem;font-weight:600;color:var(--gold-deep);background:var(--gold-soft);border-radius:8px;padding:5px 10px}
+  .tag-free{font-size:.74rem;font-weight:700;color:#2e7d4f;background:#e3f3e9;border:1px solid #bfe3cd;border-radius:8px;padding:5px 10px;display:inline-flex;align-items:center;gap:5px}
+  .tag-free .d{width:7px;height:7px;border-radius:50%;background:#2e7d4f;animation:pulse 2s infinite}
   .card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--line)}
   .price{font-family:var(--display);font-weight:600;font-size:1.5rem}
   .price small{display:block;font-family:var(--body);font-size:.72rem;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
@@ -204,17 +206,32 @@
   /* Interactive aerial map */
   .imap-wrap{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#0d0c09;margin-top:14px}
   .imap-wrap img.base{width:100%;display:block}
-  .imap-svg{position:absolute;inset:0;width:100%;height:100%}
-  .imap-svg polygon{fill:rgba(218,185,103,0);stroke:rgba(218,185,103,0);stroke-width:2;cursor:pointer;transition:fill .3s ease,stroke .3s ease}
-  .imap-svg polygon:hover,.imap-svg polygon.on{fill:rgba(218,185,103,.42);stroke:rgba(218,185,103,.95)}
-  .imap-pin{position:absolute;transform:translate(-50%,-120%);background:rgba(22,19,16,.92);color:#fff;border:1px solid rgba(218,185,103,.5);padding:7px 14px;border-radius:100px;font-weight:700;font-size:.82rem;letter-spacing:.04em;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;z-index:3}
-  .imap-pin.show{opacity:1;transform:translate(-50%,-135%)}
-  .imap-pin b{color:var(--gold)}
+  .imap-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .imap-svg polygon{fill:rgba(218,185,103,0);stroke:rgba(218,185,103,0);stroke-width:.5;transition:fill .3s ease,stroke .3s ease}
+  .imap-svg polygon.on{fill:rgba(218,185,103,.45);stroke:rgba(218,185,103,1)}
+  /* numbered markers */
+  .imap-marker{position:absolute;transform:translate(-50%,-50%);z-index:4;cursor:pointer;display:grid;place-items:center}
+  .imap-marker .pinwrap{position:relative;display:grid;place-items:center;transition:transform .25s}
+  .imap-marker:hover .pinwrap,.imap-marker.on .pinwrap{transform:scale(1.15)}
+  .imap-marker .circle{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));border:3px solid #fff;box-shadow:0 6px 18px -4px rgba(0,0,0,.6);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:1.05rem;color:#1c1a16}
+  .imap-marker .ping{position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);animation:pingA 2s ease-out infinite}
+  @keyframes pingA{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.2);opacity:0}}
+  .imap-marker.on .circle{background:#fff;color:var(--gold-deep);border-color:var(--gold)}
+  /* info card popup */
+  .imap-card{position:absolute;z-index:5;transform:translate(-50%,calc(-100% - 28px));background:rgba(255,253,248,.98);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);min-width:190px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+  .imap-card.show{opacity:1;transform:translate(-50%,calc(-100% - 34px))}
+  .imap-card::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);border:8px solid transparent;border-top-color:rgba(255,253,248,.98)}
+  .imap-card h4{font-family:var(--display);font-weight:600;font-size:1.15rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .imap-card .av{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#2e7d4f;background:#e3f3e9;border-radius:6px;padding:3px 8px}
+  .imap-card .av .d{width:7px;height:7px;border-radius:50%;background:#2e7d4f}
+  .imap-card .det{display:flex;flex-direction:column;gap:5px;font-size:.85rem;color:var(--ink-soft)}
+  .imap-card .det .l{display:flex;justify-content:space-between;gap:14px}
+  .imap-card .det .l b{color:var(--ink);font-weight:700}
   .imap-legend{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-  .imap-legend button{display:inline-flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:10px 18px;font-family:var(--body);font-weight:600;font-size:.9rem;color:var(--ink);cursor:pointer;transition:border-color .25s,background .25s,transform .2s}
-  .imap-legend button:hover{transform:translateY(-2px)}
-  .imap-legend button.on{background:var(--gold-soft);border-color:var(--gold)}
-  .imap-legend .sw{width:14px;height:14px;border-radius:4px;background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+  .imap-legend button{display:inline-flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:11px 20px;font-family:var(--body);font-weight:600;font-size:.92rem;color:var(--ink);cursor:pointer;transition:border-color .25s,background .25s,transform .2s}
+  .imap-legend button:hover,.imap-legend button.on{transform:translateY(-2px);background:var(--gold-soft);border-color:var(--gold)}
+  .imap-legend button .badge-n{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1c1a16;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+  .imap-legend button small{color:var(--ink-soft);font-weight:600}
   .imap-hint{text-align:center;color:var(--ink-soft);font-size:.86rem;margin-top:14px}
   .imap-hint svg{width:16px;height:16px;vertical-align:-3px;color:var(--gold-deep)}
 
@@ -246,6 +263,18 @@
   .benefits .sec-head h2{color:#fff}
   .benefits .sec-head p{color:rgba(250,246,238,.7)}
   .benefits .eyebrow.ghost{background:rgba(218,185,103,.14);border-color:rgba(218,185,103,.3);color:var(--gold)}
+  /* highlight info bar */
+  .infobar{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:900px;margin:0 auto 34px}
+  .info{background:rgba(255,255,255,.04);border:1px solid rgba(218,185,103,.25);border-radius:18px;padding:24px 22px;text-align:center;transition:transform .3s,background .3s}
+  .info:hover{transform:translateY(-5px);background:rgba(218,185,103,.08)}
+  .info-ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;margin:0 auto 14px;background:linear-gradient(135deg,rgba(218,185,103,.22),rgba(218,185,103,.08));border:1px solid rgba(218,185,103,.3)}
+  .info-ic svg{width:28px;height:28px;color:var(--gold)}
+  .info .big{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1;margin-bottom:6px;color:#fff}
+  .info .lbl{font-size:.86rem;color:rgba(250,246,238,.66)}
+  .info:hover .i-key{animation:beat 1.2s ease-in-out infinite}
+  .info:hover .i-coin{transform-origin:center;animation:flip 1.6s ease-in-out infinite}
+  .info:hover .i-cal{animation:floaty 2s ease-in-out infinite}
+  .timeline-note{max-width:760px;margin:0 auto 8px;text-align:center;color:rgba(250,246,238,.7);font-size:.96rem;line-height:1.6}
   .ben-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:840px;margin:0 auto}
   .ben{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:34px 30px;transition:transform .3s,background .3s,border-color .3s}
   .ben:hover{transform:translateY(-7px);background:rgba(218,185,103,.08);border-color:rgba(218,185,103,.4)}
@@ -343,6 +372,7 @@
     .stats-grid{grid-template-columns:repeat(2,1fr)}
     .stat:nth-child(2){border-right:none}
     .ben-grid{grid-template-columns:1fr}
+    .infobar{grid-template-columns:1fr}
     .contact-grid,.loc-grid{grid-template-columns:1fr;gap:30px}
     .feature{grid-template-columns:1fr}
     .feature .fimg{min-height:260px}
@@ -371,14 +401,18 @@
     .wrap{padding:0 16px}
 
     /* Showcase / gallery mobile */
-    .showcase-main{aspect-ratio:4/3;border-radius:18px}
-    .showcase-cap{padding:16px}
-    .showcase-cap h3{font-size:1.1rem}
-    .showcase-cap p{font-size:.82rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .showcase-main{aspect-ratio:auto;height:auto;border-radius:18px}
+    .showcase-main img{position:relative;height:auto;width:100%;display:block}
+    .showcase-cap{padding:14px}
+    .showcase-cap h3{font-size:1.05rem}
+    .showcase-cap p{font-size:.8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .thumbs{grid-template-columns:repeat(3,1fr);gap:8px}
+    .thumb{aspect-ratio:4/3}
 
     /* Property cards mobile */
     .card{border-radius:18px}
-    .card-media{aspect-ratio:16/10}
+    .card-media{aspect-ratio:auto;height:200px}
+    .card-media img{height:100%;width:100%}
     .card-body{padding:18px}
     .card h3{font-size:1.2rem}
     .card-desc{font-size:.88rem}
@@ -386,7 +420,7 @@
     .spec{padding:7px 10px;font-size:.78rem}
     .tags{gap:5px}
     .tag{font-size:.7rem;padding:4px 8px}
-    .price{font-size:1.3rem}
+    .price{font-size:1.2rem}
 
     /* Description + spec sheet mobile */
     .desc{gap:24px}
@@ -405,12 +439,12 @@
 
     /* Feature (3D tour) mobile */
     .feature{grid-template-columns:1fr;border-radius:22px;padding:8px}
-    .feature .fimg{min-height:200px;border-radius:16px}
+    .feature .fimg{min-height:200px;height:220px;border-radius:16px}
     .feature .fbody{padding:22px 18px}
     .feature .fbody h3{font-size:1.3rem}
 
     /* Pano mobile */
-    .pano{border-radius:18px;aspect-ratio:4/3}
+    .pano{border-radius:18px;aspect-ratio:auto;height:300px}
 
     /* Map mobile */
     .map-wrap{min-height:280px;border-radius:18px}
@@ -511,18 +545,18 @@
 
     <div class="showcase reveal">
       <div class="showcase-main">
-        <img id="mainShot" src="assets/aerial-three.jpg" alt="Vizualizácia projektu troch domov">
+        <img id="mainShot" src="assets/aerial-three.jpg" alt="Vizualizácia projektu troch domov v Harichovciach">
         <div class="showcase-cap"><h3 id="capTitle">Celý areál z vtáčej perspektívy</h3><p id="capText">Tri domy na vlastných oplotených pozemkoch s príjazdovou cestou a parkovaním, lemované poľami na okraji obce.</p></div>
       </div>
       <div class="thumbs" id="thumbs">
-        <div class="thumb active" data-img="assets/aerial-three.jpg" data-t="Celý areál z vtáčej perspektívy" data-d="Tri domy na vlastných oplotených pozemkoch s príjazdovou cestou a parkovaním, lemované poľami na okraji obce."><img src="assets/aerial-three.jpg" alt=""></div>
-        <div class="thumb" data-img="assets/aerial-pair.jpg" data-t="Valbová strecha a škridla" data-d="Dva z domov majú elegantnú valbovú strechu z betónovej škridly a krytú vstupnú terasu s dreveným obkladom."><img src="assets/aerial-pair.jpg" alt=""></div>
-        <div class="thumb" data-img="assets/entry-wood.jpg" data-t="Vstup s dreveným obkladom" data-d="Moderný vstup s lamelovým dreveným obkladom a veľkými oknami s izolačným trojsklom."><img src="assets/entry-wood.jpg" alt=""></div>
-        <div class="thumb" data-img="assets/garden-pergola.jpg" data-t="Záhrada a krytá terasa" data-d="Pultová strecha s presahom tvorí krytú terasu — ideálne miesto na rodinné posedenie v súkromí záhrady."><img src="assets/garden-pergola.jpg" alt=""></div>
-        <div class="thumb" data-img="assets/street-white-car.jpg" data-t="Príjazd a parkovanie" data-d="Spevnená príjazdová cesta a parkovacie státie pri každom dome, oddelené murovaným oplotením."><img src="assets/street-white-car.jpg" alt=""></div>
-        <div class="thumb" data-img="assets/street-red-car.jpg" data-t="Pohľad z ulice" data-d="Čistá biela fasáda, drevené detaily a upravená predzáhradka s okrasnými trávami."><img src="assets/street-red-car.jpg" alt=""></div>
-        <div class="thumb" data-img="assets/garden-back.jpg" data-t="Záhradná strana domu" data-d="Veľké okná orientované do záhrady prinášajú do interiéru množstvo svetla a výhľad do zelene."><img src="assets/garden-back.jpg" alt=""></div>
-        <div class="thumb" data-img="assets/garden-side.jpg" data-t="Súkromie a zeleň" data-d="Murované oplotenie po obvode pozemku zaisťuje súkromie. Pozemok je rovinatý a slnečný."><img src="assets/garden-side.jpg" alt=""></div>
+        <div class="thumb active" data-img="assets/aerial-three.jpg" data-t="Celý areál z vtáčej perspektívy" data-d="Tri samostatne stojace domy na vlastných oplotených pozemkoch, lemované poľami na okraji obce Harichovce."><img src="assets/aerial-three.jpg" alt="Letecký pohľad na tri domy"></div>
+        <div class="thumb" data-img="assets/aerial-pair.jpg" data-t="Valbová strecha a krytý vstup" data-d="Všetky domy majú elegantnú valbovú strechu z betónovej škridly, bielu fasádu a krytý vstup s dreveným obkladom."><img src="assets/aerial-pair.jpg" alt="Detail domu s valbovou strechou"></div>
+        <div class="thumb" data-img="assets/street-white-car.jpg" data-t="Príjazd a parkovanie" data-d="Spevnená príjazdová cesta a parkovacie státie pri každom dome, pozemky oddelené murovaným oplotením."><img src="assets/street-white-car.jpg" alt="Pohľad na príjazd a parkovanie"></div>
+        <div class="thumb" data-img="assets/street-red-car.jpg" data-t="Pohľad z ulice" data-d="Čistá biela fasáda, drevené detaily pri vstupe a upravená predzáhradka s okrasnými trávami."><img src="assets/street-red-car.jpg" alt="Pohľad na dom z ulice"></div>
+        <div class="thumb" data-img="assets/entry-wood.jpg" data-t="Vstup s dreveným obkladom" data-d="Detail vstupu — drevený lamelový obklad, veľké okná s izolačným trojsklom a spevnená plocha pred vstupom."><img src="assets/entry-wood.jpg" alt="Vstup s dreveným obkladom"></div>
+        <div class="thumb" data-img="assets/garden-pergola.jpg" data-t="Záhrada a krytá terasa" data-d="Krytá terasa s presahom strechy — ideálne miesto na rodinné posedenie v súkromí oplotenej záhrady."><img src="assets/garden-pergola.jpg" alt="Záhrada a krytá terasa"></div>
+        <div class="thumb" data-img="assets/garden-back.jpg" data-t="Záhradná strana domu" data-d="Veľké presklené plochy orientované do záhrady prinášajú do interiéru množstvo svetla a výhľad do zelene."><img src="assets/garden-back.jpg" alt="Záhradná strana domu"></div>
+        <div class="thumb" data-img="assets/garden-side.jpg" data-t="Súkromie a zeleň" data-d="Murované oplotenie po obvode pozemku zaisťuje súkromie. Pozemok je rovinatý a slnečný."><img src="assets/garden-side.jpg" alt="Bočný pohľad na dom a záhradu"></div>
         <div class="thumb" data-img="assets/floorplan.png" data-t="Pôdorys · 4-izbová dispozícia" data-d="Premyslená dispozícia bez zbytočných metrov — spálňa so šatníkom, 2× detská izba, ob. hala s jedálňou a kuchyňou, 2× kúpeľňa, technická miestnosť."><img src="assets/floorplan.png" alt="Pôdorys domu"></div>
       </div>
     </div>
@@ -536,36 +570,36 @@
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
         <div class="card-body">
-          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
+          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce · dom pri vjazde</div>
           <h3>Alpha 1</h3>
-          <p class="card-desc">Nízkoenergetický 4-izbový bungalov s vlastným oplotením, krytou terasou a šatníkom. Pozemok 461 m².</p>
+          <p class="card-desc">Samostatne stojaci 4-izbový bungalov na vlastnom oplotenom pozemku. Prvý dom od vjazdu do areálu.</p>
           <div class="specs">
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>93,36 m²</span>
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4 izby</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>461 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>461 m² pozemok</span>
           </div>
-          <div class="tags"><span class="tag">Certifikát A</span><span class="tag">2× kúpeľňa s WC</span><span class="tag">Rekuperácia</span></div>
-          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          <div class="tags"><span class="tag-free"><span class="d"></span>Voľný</span><span class="tag">Certifikát A</span><span class="tag">Smart home</span></div>
+          <div class="card-foot"><div class="price">Cena dohodou<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </div>
       </article>
 
       <article class="card reveal" style="transition-delay:.1s">
         <div class="card-media">
-          <img src="assets/garden-pergola.jpg" alt="Dom Alpha 2">
+          <img src="assets/street-white-car.jpg" alt="Dom Alpha 2">
           <span class="badge">Alpha 2 · Exkluzívne</span>
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
         <div class="card-body">
-          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
+          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce · stredný dom</div>
           <h3>Alpha 2</h3>
-          <p class="card-desc">Nízkoenergetický 4-izbový bungalov s pultovou strechou a dreveným obkladom. Pozemok 439 m².</p>
+          <p class="card-desc">Samostatne stojaci 4-izbový bungalov na vlastnom oplotenom pozemku. Stredný dom v areáli.</p>
           <div class="specs">
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>93,36 m²</span>
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4 izby</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>439 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>439 m² pozemok</span>
           </div>
-          <div class="tags"><span class="tag">Trojsklo</span><span class="tag">Príprava na krb</span><span class="tag">Krytá terasa</span></div>
-          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          <div class="tags"><span class="tag-free"><span class="d"></span>Voľný</span><span class="tag">Certifikát A</span><span class="tag">Smart home</span></div>
+          <div class="card-foot"><div class="price">Cena dohodou<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </div>
       </article>
 
@@ -576,16 +610,16 @@
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
         <div class="card-body">
-          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
+          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce · najväčší pozemok</div>
           <h3>Alpha 3</h3>
-          <p class="card-desc">Nízkoenergetický 4-izbový bungalov na najväčšom pozemku projektu. Pozemok 590 m².</p>
+          <p class="card-desc">Samostatne stojaci 4-izbový bungalov na vlastnom oplotenom pozemku. Najväčší pozemok v projekte.</p>
           <div class="specs">
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>93,36 m²</span>
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4 izby</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>590 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>590 m² pozemok</span>
           </div>
-          <div class="tags"><span class="tag">Zateplenie 150 mm</span><span class="tag">Podlahové kúrenie</span><span class="tag">Inžinierske siete</span></div>
-          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          <div class="tags"><span class="tag-free"><span class="d"></span>Voľný</span><span class="tag">Certifikát A</span><span class="tag">Smart home</span></div>
+          <div class="card-foot"><div class="price">Cena dohodou<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </div>
       </article>
     </div>
@@ -683,32 +717,34 @@
     <div class="sec-head reveal" style="margin-top:80px">
       <div class="eyebrow ghost"><span class="dot"></span>Rozmiestnenie domov</div>
       <h2>Interaktívny plán areálu</h2>
-      <p>Prejdite kurzorom ponad dom — podsvieti sa. Alpha 1 je dom od cesty, Alpha 2 stredný a Alpha 3 krajný vpravo.</p>
+      <p>Ťuknite na číslo domu (alebo naň prejdite myšou) — zobrazí sa pozemok aj detaily. Všetky tri domy sú momentálne voľné.</p>
     </div>
 
     <div class="imap-wrap reveal" id="imapWrap">
       <img class="base" src="assets/aerial-three.jpg" alt="Letecký plán troch domov">
       <svg class="imap-svg" viewBox="0 0 100 56" preserveAspectRatio="none">
-        <!-- Alpha 1 — house nearest the road (left) -->
-        <polygon data-house="Alpha 1" points="29,34 36,24 45,34 37,45"></polygon>
-        <!-- Alpha 2 — middle house -->
-        <polygon data-house="Alpha 2" points="43,29 50,19 60,28 51,39"></polygon>
-        <!-- Alpha 3 — rightmost house -->
-        <polygon data-house="Alpha 3" points="57,24 64,14 74,23 65,34"></polygon>
+        <polygon data-house="Alpha 1" points="13,41 28,26 40,34 25,52"></polygon>
+        <polygon data-house="Alpha 2" points="28,34 44,19 56,27 40,45"></polygon>
+        <polygon data-house="Alpha 3" points="44,27 60,11 76,21 58,40"></polygon>
       </svg>
-      <div class="imap-pin" id="imapPin"></div>
+      <!-- numbered markers positioned on each house -->
+      <div class="imap-marker" data-house="Alpha 1" style="left:28%;top:55%"><div class="pinwrap"><span class="ping"></span><span class="circle">1</span></div></div>
+      <div class="imap-marker" data-house="Alpha 2" style="left:46%;top:42%"><div class="pinwrap"><span class="ping"></span><span class="circle">2</span></div></div>
+      <div class="imap-marker" data-house="Alpha 3" style="left:60%;top:33%"><div class="pinwrap"><span class="ping"></span><span class="circle">3</span></div></div>
+      <!-- info card -->
+      <div class="imap-card" id="imapCard"></div>
     </div>
 
     <div class="imap-legend" id="imapLegend">
-      <button data-h="Alpha 1"><span class="sw"></span>Alpha 1 · 461 m²</button>
-      <button data-h="Alpha 2"><span class="sw"></span>Alpha 2 · 439 m²</button>
-      <button data-h="Alpha 3"><span class="sw"></span>Alpha 3 · 590 m²</button>
+      <button data-h="Alpha 1"><span class="badge-n">1</span>Alpha 1 <small>· 461 m²</small></button>
+      <button data-h="Alpha 2"><span class="badge-n">2</span>Alpha 2 <small>· 439 m²</small></button>
+      <button data-h="Alpha 3"><span class="badge-n">3</span>Alpha 3 <small>· 590 m²</small></button>
     </div>
-    <p class="imap-hint"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l4 16 2.5-7 7-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> Tip: prejdite myšou ponad strechu domu alebo ťuknite na tlačidlo nižšie.</p>
+    <p class="imap-hint"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l4 16 2.5-7 7-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> Tip: ťuknite na číslo 1, 2 alebo 3 priamo v pláne.</p>
 
     <!-- Virtual tour -->
     <div class="feature reveal" id="prehliadka">
-      <div class="fimg"><img src="assets/garden-back.jpg" alt="Interiér / záhradná strana domu"></div>
+      <div class="fimg"><img src="assets/street-white-car.jpg" alt="Vizualizácia domu Harichovce"></div>
       <div class="fbody">
         <div class="eyebrow ghost"><span class="dot"></span>3D virtuálna prehliadka</div>
         <h3>Prejdite si dom z pohodlia gauča</h3>
@@ -737,13 +773,33 @@
     <div class="sec-head reveal">
       <div class="eyebrow ghost"><span class="dot"></span>Prečo tieto domy</div>
       <h2>Moderné bývanie bez kompromisov</h2>
-      <p>Kvalitná stavba, nízke účty a smart home — plus financovanie a právny servis vybavíme za vás.</p>
+      <p>Kvalitná stavba, nízke účty a smart home — financovanie aj právny servis vybavíme spoločne.</p>
     </div>
-    <div class="ben-grid">
+
+    <div class="infobar reveal">
+      <div class="info">
+        <div class="info-ic"><svg viewBox="0 0 32 32" fill="none"><circle class="i-key" cx="11" cy="16" r="6" stroke="currentColor" stroke-width="1.8"/><path d="M16 16h11M23 16v5M27 16v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="big">3 / 3 voľné</div>
+        <div class="lbl">všetky domy sú momentálne dostupné</div>
+      </div>
+      <div class="info">
+        <div class="info-ic"><svg viewBox="0 0 32 32" fill="none"><circle class="i-coin" cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v10M13 13.5c0-1.4 1.3-2.5 3-2.5s3 .8 3 2-1 1.8-3 2.2-3 1-3 2.3 1.3 2.5 3 2.5 3-1 3-2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="big">~ 150 € / mes.</div>
+        <div class="lbl">približné náklady spojené s bývaním</div>
+      </div>
+      <div class="info">
+        <div class="info-ic"><svg viewBox="0 0 32 32" fill="none"><rect class="i-cal" x="6" y="7" width="20" height="19" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M6 12h20M11 4v5M21 4v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 17l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="big">Jeseň 2027</div>
+        <div class="lbl">kolaudácia a odovzdanie kľúčov</div>
+      </div>
+    </div>
+    <p class="timeline-note reveal">Kvalitná stavba potrebuje svoj čas. Netlačíme na nič a dôsledne dodržíme všetky technologické postupy — aby ste sa do svojho domova nasťahovali bez kompromisov na kvalite.</p>
+
+    <div class="ben-grid" style="margin-top:36px">
       <div class="ben reveal">
         <div class="ben-ic"><svg viewBox="0 0 32 32" fill="none"><circle class="p-coin" cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v10M13 13.5c0-1.4 1.3-2.5 3-2.5s3 .8 3 2 -1 1.8-3 2.2-3 1-3 2.3 1.3 2.5 3 2.5 3-1 3-2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <h4>Financovanie zdarma</h4>
-        <p>Bezplatné finančné poradenstvo naším odborníkom. Pomôžeme vám s výberom hypotéky aj s celým procesom financovania nehnuteľnosti — vrátane orientačnej mesačnej splátky.</p>
+        <h4>Financovanie ušité na mieru</h4>
+        <p>U každého klienta je proces kúpy a financovania iný — my si to plne uvedomujeme. Spoločne nájdeme ideálne riešenie. Bezplatné finančné poradenstvo naším odborníkom je samozrejmosťou.</p>
       </div>
       <div class="ben reveal" style="transition-delay:.1s">
         <div class="ben-ic"><svg viewBox="0 0 32 32" fill="none"><path class="p-shield" d="M16 4l10 4v7c0 6.4-4.4 10.6-10 13C10.4 25.6 6 21.4 6 15V8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 16l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -822,10 +878,14 @@
             <div class="km"><b>cca 10 min</b><span>autom</span></div>
           </div>
         </div>
+        <a class="btn btn-gold" style="margin-top:22px;align-self:flex-start" href="https://maps.app.goo.gl/BqRMxMZobeW3VkDU9" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>
+          Otvoriť v Google Mapách
+        </a>
       </div>
       <div class="map-wrap reveal" style="transition-delay:.1s">
-        <iframe title="Mapa — Harichovce" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-          src="https://www.google.com/maps?q=Harichovce,%20Slovensko&hl=sk&z=12&output=embed"></iframe>
+        <iframe title="Poloha pozemku — Harichovce" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+          src="https://www.google.com/maps?q=48.957132,20.587647&hl=sk&z=16&output=embed"></iframe>
       </div>
     </div>
   </div>
@@ -966,40 +1026,56 @@
   const form=document.getElementById('dopytForm');
   form.addEventListener('submit',e=>{e.preventDefault();document.getElementById('formInner').style.display='none';document.getElementById('formOk').classList.add('show')});
 
-  // interactive aerial map
+  // interactive aerial map — markers + info card
   (function(){
     const wrap=document.getElementById('imapWrap');
     if(!wrap)return;
     const polys=[...wrap.querySelectorAll('polygon')];
-    const pin=document.getElementById('imapPin');
+    const markers=[...wrap.querySelectorAll('.imap-marker')];
+    const card=document.getElementById('imapCard');
     const legendBtns=[...document.querySelectorAll('#imapLegend button')];
-    function centroid(poly){
-      const pts=poly.getAttribute('points').trim().split(/\s+/).map(p=>p.split(',').map(Number));
-      let x=0,y=0;pts.forEach(p=>{x+=p[0];y+=p[1]});return {x:x/pts.length,y:y/pts.length};
-    }
-    function activate(name){
-      polys.forEach(p=>{
-        const on=p.dataset.house===name;
-        p.classList.toggle('on',on);
-        if(on){
-          const c=centroid(p);
-          pin.style.left=c.x+'%';pin.style.top=c.y+'%';
-          pin.innerHTML='<b>'+name+'</b>';
-          pin.classList.add('show');
-        }
-      });
+    const DATA={
+      'Alpha 1':{n:'1',plot:'461 m²',pos:'Pri vjazde do areálu'},
+      'Alpha 2':{n:'2',plot:'439 m²',pos:'Stredný dom'},
+      'Alpha 3':{n:'3',plot:'590 m²',pos:'Najväčší pozemok'}
+    };
+    let locked=null;
+    function show(name){
+      polys.forEach(p=>p.classList.toggle('on',p.dataset.house===name));
+      markers.forEach(m=>m.classList.toggle('on',m.dataset.house===name));
       legendBtns.forEach(b=>b.classList.toggle('on',b.dataset.h===name));
+      const mk=markers.find(m=>m.dataset.house===name);
+      const d=DATA[name];
+      if(mk&&d){
+        card.style.left=mk.style.left;
+        card.style.top=mk.style.top;
+        card.innerHTML='<h4>'+name+' <span class="av"><span class="d"></span>Voľný</span></h4>'+
+          '<div class="det"><div class="l"><span>Pozemok</span><b>'+d.plot+'</b></div>'+
+          '<div class="l"><span>Úžitková</span><b>93,36 m²</b></div>'+
+          '<div class="l"><span>Dispozícia</span><b>4-izbový</b></div>'+
+          '<div class="l"><span>Poloha</span><b>'+d.pos+'</b></div></div>';
+        card.classList.add('show');
+      }
     }
-    function clear(){polys.forEach(p=>p.classList.remove('on'));pin.classList.remove('show');legendBtns.forEach(b=>b.classList.remove('on'));}
-    polys.forEach(p=>{
-      p.addEventListener('mouseenter',()=>activate(p.dataset.house));
-      p.addEventListener('mouseleave',clear);
+    function clear(){
+      if(locked)return;
+      polys.forEach(p=>p.classList.remove('on'));
+      markers.forEach(m=>m.classList.remove('on'));
+      legendBtns.forEach(b=>b.classList.remove('on'));
+      card.classList.remove('show');
+    }
+    markers.forEach(m=>{
+      m.addEventListener('mouseenter',()=>{if(!locked)show(m.dataset.house)});
+      m.addEventListener('mouseleave',clear);
+      m.addEventListener('click',e=>{e.stopPropagation();locked=(locked===m.dataset.house)?null:m.dataset.house;locked?show(locked):clear();});
     });
     legendBtns.forEach(b=>{
-      b.addEventListener('mouseenter',()=>activate(b.dataset.h));
+      b.addEventListener('mouseenter',()=>{if(!locked)show(b.dataset.h)});
       b.addEventListener('mouseleave',clear);
-      b.addEventListener('click',()=>activate(b.dataset.h));
+      b.addEventListener('click',()=>{locked=(locked===b.dataset.h)?null:b.dataset.h;locked?show(locked):clear();});
     });
+    // click elsewhere unlocks
+    document.addEventListener('click',e=>{if(!wrap.contains(e.target)&&!e.target.closest('#imapLegend')){locked=null;clear();}});
   })();
 
   // 360 panorama via Pannellum (real spherical viewer)
