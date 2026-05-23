@@ -152,7 +152,7 @@
 
   /* Layout / room pictograms */
   .layout{margin-top:60px}
-  .layout-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .layout-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .lay{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 16px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s,border-color .3s}
   .lay:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--gold)}
   .lay-ic{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;margin:0 auto 12px;background:var(--gold-soft);color:var(--gold-deep);transition:background .3s}
@@ -168,6 +168,19 @@
   .lay:hover .l-smart{animation:beat 1.2s ease-in-out infinite}
   @media(max-width:980px){.layout-grid{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:680px){.layout-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* Floor plan feature */
+  .fp{background:var(--paper);border:1px solid var(--line);border-radius:32px;padding:10px;margin-top:54px;display:grid;grid-template-columns:.95fr 1.05fr;overflow:hidden;box-shadow:var(--shadow)}
+  .fp .fp-img{position:relative;border-radius:24px;overflow:hidden;min-height:380px;background:#f6f2ea;display:grid;place-items:center;padding:20px}
+  .fp .fp-img img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;cursor:zoom-in}
+  .fp .fp-body{padding:38px 40px;display:flex;flex-direction:column;justify-content:center}
+  .fp .fp-body .eyebrow{margin-bottom:16px}
+  .fp .fp-body h3{font-family:var(--display);font-weight:600;font-size:1.7rem;line-height:1.14;margin-bottom:14px}
+  .fp .fp-body h3 em{font-style:italic;color:var(--gold-deep)}
+  .fp .fp-body p{color:var(--ink-soft);font-size:.98rem;margin-bottom:16px}
+  .fp-rooms{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .fp-rooms .r{font-size:.82rem;font-weight:600;color:var(--gold-deep);background:var(--gold-soft);border-radius:8px;padding:5px 11px;border:1px solid rgba(194,160,78,.3)}
+  @media(max-width:980px){.fp{grid-template-columns:1fr}.fp .fp-img{min-height:300px}}
 
   /* Lightbox */
   .thumb,.showcase-main{cursor:zoom-in}
@@ -382,7 +395,7 @@
   <div class="hero-bg"><img src="assets/aerial-three.jpg" alt="Letecký pohľad na tri novostavby rodinných domov v Harichovciach"></div>
   <div class="wrap hero-inner">
     <div class="reveal in"><span class="eyebrow"><span class="dot"></span>Exkluzívne · Harichovce, okres Spišská Nová Ves</span></div>
-    <h1 class="reveal in" style="transition-delay:.08s">Tri nové domy, v ktorých <em>začne nový príbeh</em></h1>
+    <h1 class="reveal in" style="transition-delay:.08s">Tri 4-izbové domy, v ktorých <em>začne nový príbeh</em></h1>
     <p class="reveal in" style="transition-delay:.16s">Samostatne stojace nízkoenergetické tehlové bungalovy na vlastnom oplotenom pozemku. Pokojná obec na dosah mesta, energetický certifikát A a moderné prevedenie pripravené pre vašu rodinu.</p>
     <div class="hero-cta reveal in" style="transition-delay:.24s">
       <a href="#domy" class="btn btn-gold">Pozrieť domy<svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -396,7 +409,7 @@
   <div class="wrap"><div class="stats-grid">
     <div class="stat"><div class="ic"><svg class="float" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5.2 5.7.8-4.1 4 1 5.6L12 21l-5.1 2.6 1-5.6-4.1-4 5.7-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="rgba(218,185,103,.25)"/></svg></div><div><div class="num">Certifikát A</div><div class="lbl">nízkoenergetické domy</div></div></div>
     <div class="stat"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><circle class="spin-soft" cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7" stroke-dasharray="4 4"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="num">2026 / 2027</div><div class="lbl">výstavba · kolaudácia</div></div></div>
-    <div class="stat"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V9l8-5 8 5v11" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path class="float" d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><div><div class="num">3 domy</div><div class="lbl">vlastný oplotený pozemok</div></div></div>
+    <div class="stat"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V9l8-5 8 5v11" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path class="float" d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><div><div class="num">4-izbové</div><div class="lbl">3 samostatné domy · oplotené pozemky</div></div></div>
     <div class="stat"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path class="beat" d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="rgba(218,185,103,.25)"/></svg></div><div><div class="num">#1 v regióne</div><div class="lbl">najviac pozitívnych recenzií</div></div></div>
   </div></div>
 </section>
@@ -406,8 +419,8 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow ghost"><span class="dot"></span>Projekt Harichovce</div>
-      <h2>Tri bungalovy, jeden pokojný areál</h2>
-      <p>Samostatne stojace prízemné domy s rovnakým štandardom prevedenia. Prelistujte si vizualizácie celého projektu.</p>
+      <h2>Tri 4-izbové Alpha domy</h2>
+      <p>Samostatne stojace 4-izbové bungalovy s rovnakým štandardom prevedenia. Prelistujte si vizualizácie celého projektu.</p>
     </div>
 
     <div class="showcase reveal">
@@ -424,6 +437,7 @@
         <div class="thumb" data-img="assets/street-red-car.jpg" data-t="Pohľad z ulice" data-d="Čistá biela fasáda, drevené detaily a upravená predzáhradka s okrasnými trávami."><img src="assets/street-red-car.jpg" alt=""></div>
         <div class="thumb" data-img="assets/garden-back.jpg" data-t="Záhradná strana domu" data-d="Veľké okná orientované do záhrady prinášajú do interiéru množstvo svetla a výhľad do zelene."><img src="assets/garden-back.jpg" alt=""></div>
         <div class="thumb" data-img="assets/garden-side.jpg" data-t="Súkromie a zeleň" data-d="Murované oplotenie po obvode pozemku zaisťuje súkromie. Pozemok je rovinatý a slnečný."><img src="assets/garden-side.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/floorplan.png" data-t="Pôdorys · 4-izbová dispozícia" data-d="Premyslená dispozícia bez zbytočných metrov — spálňa so šatníkom, 2× detská izba, ob. hala s jedálňou a kuchyňou, 2× kúpeľňa, technická miestnosť."><img src="assets/floorplan.png" alt="Pôdorys domu"></div>
       </div>
     </div>
 
@@ -431,18 +445,18 @@
     <div class="props">
       <article class="card reveal">
         <div class="card-media">
-          <img src="assets/aerial-pair.jpg" alt="Dom A — valbová strecha">
-          <span class="badge">Dom A · Exkluzívne</span>
+          <img src="assets/aerial-pair.jpg" alt="Dom Alpha 1">
+          <span class="badge">Alpha 1 · Exkluzívne</span>
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
         <div class="card-body">
           <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
-          <h3>Bungalov s valbovou strechou</h3>
-          <p class="card-desc">Klasický prízemný dom s betónovou škridlou, krytým vstupom a tromi obytnými miestnosťami. Pripravený na nasťahovanie.</p>
+          <h3>Alpha 1</h3>
+          <p class="card-desc">Nízkoenergetický 4-izbový bungalov s vlastným oplotením, krytou terasou a šatníkom. Pozemok 461 m².</p>
           <div class="specs">
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>95 m²</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 izby</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>500 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>93,36 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4 izby</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>461 m²</span>
           </div>
           <div class="tags"><span class="tag">Certifikát A</span><span class="tag">2× kúpeľňa s WC</span><span class="tag">Rekuperácia</span></div>
           <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
@@ -451,18 +465,18 @@
 
       <article class="card reveal" style="transition-delay:.1s">
         <div class="card-media">
-          <img src="assets/garden-pergola.jpg" alt="Dom B — pultová strecha s terasou">
-          <span class="badge">Dom B · Exkluzívne</span>
+          <img src="assets/garden-pergola.jpg" alt="Dom Alpha 2">
+          <span class="badge">Alpha 2 · Exkluzívne</span>
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
         <div class="card-body">
           <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
-          <h3>Moderný dom s krytou terasou</h3>
-          <p class="card-desc">Pultová strecha s presahom, drevený lamelový obklad a veľká krytá terasa do záhrady. Príprava na krb v obývačke.</p>
+          <h3>Alpha 2</h3>
+          <p class="card-desc">Nízkoenergetický 4-izbový bungalov s pultovou strechou a dreveným obkladom. Pozemok 439 m².</p>
           <div class="specs">
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>95 m²</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 izby</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>500 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>93,36 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4 izby</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>439 m²</span>
           </div>
           <div class="tags"><span class="tag">Trojsklo</span><span class="tag">Príprava na krb</span><span class="tag">Krytá terasa</span></div>
           <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
@@ -471,18 +485,18 @@
 
       <article class="card reveal" style="transition-delay:.2s">
         <div class="card-media">
-          <img src="assets/street-red-car.jpg" alt="Dom C — pohľad z ulice">
-          <span class="badge">Dom C · Exkluzívne</span>
+          <img src="assets/street-red-car.jpg" alt="Dom Alpha 3">
+          <span class="badge">Alpha 3 · Exkluzívne</span>
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
         <div class="card-body">
           <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
-          <h3>Bungalov s drevenými detailmi</h3>
-          <p class="card-desc">Čistá biela fasáda s dreveným vstupom, podlahové vykurovanie a plné napojenie na inžinierske siete. Holopriestor pre vašu úpravu.</p>
+          <h3>Alpha 3</h3>
+          <p class="card-desc">Nízkoenergetický 4-izbový bungalov na najväčšom pozemku projektu. Pozemok 590 m².</p>
           <div class="specs">
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>95 m²</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 izby</span>
-            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>500 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>93,36 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4 izby</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>590 m²</span>
           </div>
           <div class="tags"><span class="tag">Zateplenie 150 mm</span><span class="tag">Podlahové kúrenie</span><span class="tag">Inžinierske siete</span></div>
           <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
@@ -494,17 +508,17 @@
     <div class="desc reveal">
       <div class="desc-copy">
         <h3>O nehnuteľnosti</h3>
-        <span class="rooms"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 obytné miestnosti · obývačka s kuchyňou · 2× kúpeľňa s WC</span>
+        <span class="rooms"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4-izbový dom · ob. hala s jedálňou a kuchyňou · 2× kúpeľňa s WC · šatník</span>
         <p>Exkluzívne ponúkame na predaj novostavby rodinných domov v obci Harichovce, okres Spišská Nová Ves. Ide o samostatne stojace nízkoenergetické tehlové domy na slnečnom rovinatom pozemku.</p>
-        <p>Každý dom ponúka tri samostatné obytné miestnosti, priestrannú obývaciu izbu s kuchyňou, dve kúpeľne s WC a technickú miestnosť. V obývacej miestnosti je pripravené napojenie pre krb a v obytných miestnostiach je pripravené napojenie pre exteriérové žalúzie.</p>
+        <p>Každý dom ponúka štyri izby (spálňa, 2× detská izba, šatník), priestrannú obývaciu halu s jedálňou, kuchyňu, dve kúpeľne s WC, technickú miestnosť, chodbu a zádverie. V podkroví je bonus — veľký úložný priestor. V obývacej miestnosti je pripravené napojenie pre krb a v obytných miestnostiach je pripravené napojenie pre exteriérové žalúzie.</p>
         <p>Cena nehnuteľnosti je dohodou a zahŕňa všetky poplatky spojené s prevodom vlastníckeho práva. Právny servis zabezpečujeme prostredníctvom advokátskej kancelárie a v prípade záujmu vám ponúkame bezplatné finančné poradenstvo naším odborníkom.</p>
       </div>
       <div class="spec-sheet">
         <h4><svg viewBox="0 0 24 24" fill="none"><path d="M9 4h10l5 5v19H9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" transform="translate(-4,-3)"/><path d="M5 4h9l4 4v11H5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 4v4h4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Technické parametre</h4>
         <div class="spec-list">
-          <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/></svg><span><b>Úžitková plocha</b>95 m²</span></div>
-          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Zastavaná plocha</b>128 m²</span></div>
-          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12M4 20h16" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Pozemok</b>500 m²</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/></svg><span><b>Úžitková plocha</b>93,36 m²</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Zastavaná plocha</b>122 m²</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12M4 20h16" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Pozemok</b>461 – 590 m²</span></div>
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span><b>Energetický certifikát</b>trieda A</span></div>
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="1.5"/></svg><span><b>Murivo</b>tehla, zateplenie 150 mm</span></div>
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Strecha</b>betónová škridla, väzníkový krov</span></div>
@@ -521,28 +535,60 @@
     <div class="layout">
       <div class="layout-grid">
         <div class="lay reveal">
-          <div class="lay-ic"><svg class="l-bed" viewBox="0 0 32 32" fill="none"><path d="M4 22V11M4 16h24v6M28 22v-6a3 3 0 00-3-3H12v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="13.5" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg></div>
-          <div class="n">3×</div><div class="t">samostatné izby</div>
+          <div class="lay-ic"><svg class="l-sofa" viewBox="0 0 32 32" fill="none"><path d="M6 16v-3a3 3 0 013-3h14a3 3 0 013 3v3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 16a2 2 0 012 2v3h20v-3a2 2 0 014 0v6H4v-6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <div class="n">Ob. hala</div><div class="t">s jedálňou a kuchyňou</div>
         </div>
         <div class="lay reveal" style="transition-delay:.05s">
-          <div class="lay-ic"><svg class="l-sofa" viewBox="0 0 32 32" fill="none"><path d="M6 16v-3a3 3 0 013-3h14a3 3 0 013 3v3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 16a2 2 0 012 2v3h20v-3a2 2 0 014 0v6H4v-6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-          <div class="n">Obývačka</div><div class="t">s kuchyňou</div>
+          <div class="lay-ic"><svg class="l-bed" viewBox="0 0 32 32" fill="none"><path d="M4 22V11M4 16h24v6M28 22v-6a3 3 0 00-3-3H12v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="13.5" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg></div>
+          <div class="n">Spálňa</div><div class="t">+ šatník</div>
         </div>
         <div class="lay reveal" style="transition-delay:.1s">
+          <div class="lay-ic"><svg viewBox="0 0 32 32" fill="none"><path d="M4 22V11M4 16h24v6M28 22v-6a3 3 0 00-3-3H12v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 13.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="n">2× detská</div><div class="t">izba</div>
+        </div>
+        <div class="lay reveal" style="transition-delay:.15s">
           <div class="lay-ic"><svg class="l-bath" viewBox="0 0 32 32" fill="none"><path d="M5 16h22v3a5 5 0 01-5 5H10a5 5 0 01-5-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 16V8a2.5 2.5 0 015 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11.5 8.5h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 24l-1.5 3M23 24l1.5 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <div class="n">2×</div><div class="t">kúpeľňa s WC</div>
         </div>
-        <div class="lay reveal" style="transition-delay:.15s">
+        <div class="lay reveal" style="transition-delay:.2s">
           <div class="lay-ic"><svg class="l-tech" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M16 4v3M16 25v3M28 16h-3M7 16H4M24.5 7.5l-2 2M9.5 22.5l-2 2M24.5 24.5l-2-2M9.5 9.5l-2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <div class="n">Technická</div><div class="t">miestnosť</div>
         </div>
-        <div class="lay reveal" style="transition-delay:.2s">
+        <div class="lay reveal" style="transition-delay:.25s">
+          <div class="lay-ic"><svg viewBox="0 0 32 32" fill="none"><path d="M8 6h16v20H8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 14h16" stroke="currentColor" stroke-width="1.5"/><path d="M13 6v8M19 14v12" stroke="currentColor" stroke-width="1.5"/></svg></div>
+          <div class="n">Zádverie</div><div class="t">+ chodba</div>
+        </div>
+        <div class="lay reveal" style="transition-delay:.3s">
           <div class="lay-ic"><svg viewBox="0 0 32 32" fill="none"><path d="M5 14L16 5l11 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12v12h16V12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle class="l-smart" cx="16" cy="18" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M16 18h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
           <div class="n">Smart</div><div class="t">riešenia v základe</div>
         </div>
-        <div class="lay reveal" style="transition-delay:.25s">
-          <div class="lay-ic"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="5" width="20" height="22" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M6 10h20M6 14h20M6 18h20M6 22h20" stroke="currentColor" stroke-width="1.5"/></svg></div>
-          <div class="n">Exter. žalúzie</div><div class="t">príprava v izbách</div>
+        <div class="lay reveal" style="transition-delay:.35s">
+          <div class="lay-ic"><svg viewBox="0 0 32 32" fill="none"><path d="M5 14L16 5l11 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12v12h16V12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 17h8M12 20h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="n">Podkrovie</div><div class="t">úložný priestor</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOOR PLAN FEATURE -->
+    <div class="fp reveal">
+      <div class="fp-img"><img src="assets/floorplan.png" alt="Pôdorys 4-izbového domu" onclick="openLb(slides.length-1)"></div>
+      <div class="fp-body">
+        <div class="eyebrow ghost"><span class="dot"></span>Dispozícia</div>
+        <h3>Žiadne zbytočné m² — <em>moderná funkčná dispozícia</em> s dôrazom na detail</h3>
+        <p>Každý meter štvorcový má svoje miesto. Priestranná obývacia hala s jedálňou a kuchyňou tvorí srdce domu, tri spálne (vrátane šatníka pri hlavnej spálni) poskytujú súkromie pre celú rodinu.</p>
+        <p>Dve plnohodnotné kúpeľne s WC, technická miestnosť, zádverie a chodba — nič nechýba, nič neprekáža. V podkroví je navyše veľký úložný priestor.</p>
+        <div class="fp-rooms">
+          <span class="r">Zádverie</span>
+          <span class="r">Kúpeľňa</span>
+          <span class="r">Technická miestnosť</span>
+          <span class="r">Ob. hala s jedálňou</span>
+          <span class="r">Kuchyňa</span>
+          <span class="r">Chodba</span>
+          <span class="r">2× detská izba</span>
+          <span class="r">Spálňa</span>
+          <span class="r">Šatník</span>
+          <span class="r">Kúpeľňa</span>
+          <span class="r">Podkrovie — úložný priestor</span>
         </div>
       </div>
     </div>
@@ -568,9 +614,9 @@
     </div>
 
     <div class="imap-legend" id="imapLegend">
-      <button data-h="Alpha 1"><span class="sw"></span>Alpha 1 — pri ceste</button>
-      <button data-h="Alpha 2"><span class="sw"></span>Alpha 2 — stredný</button>
-      <button data-h="Alpha 3"><span class="sw"></span>Alpha 3 — vpravo</button>
+      <button data-h="Alpha 1"><span class="sw"></span>Alpha 1 · 461 m²</button>
+      <button data-h="Alpha 2"><span class="sw"></span>Alpha 2 · 439 m²</button>
+      <button data-h="Alpha 3"><span class="sw"></span>Alpha 3 · 590 m²</button>
     </div>
     <p class="imap-hint"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l4 16 2.5-7 7-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> Tip: prejdite myšou ponad strechu domu alebo ťuknite na tlačidlo nižšie.</p>
 
@@ -724,7 +770,7 @@
           <div class="field"><label for="tel">Telefón</label><input id="tel" type="tel" placeholder="+421 9xx xxx xxx" required></div>
           <div class="field"><label for="email">E-mail</label><input id="email" type="email" placeholder="vas@email.sk"></div>
           <div class="field"><label for="dom">O ktorý dom máte záujem?</label>
-            <select id="dom"><option>Dom A — valbová strecha</option><option>Dom B — krytá terasa</option><option>Dom C — drevené detaily</option><option>Zatiaľ neviem, poraďte mi</option></select>
+            <select id="dom"><option>Alpha 1 — pozemok 461 m²</option><option>Alpha 2 — pozemok 439 m²</option><option>Alpha 3 — pozemok 590 m²</option><option>Zatiaľ neviem, poraďte mi</option></select>
           </div>
           <div class="field"><label for="sprava">Správa (nepovinné)</label><textarea id="sprava" placeholder="Napíšte nám, kedy by vám vyhovovala obhliadka…"></textarea></div>
           <button type="submit" class="btn btn-gold">Odoslať dopyt<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
