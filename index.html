@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novostavby rodinných domov, Harichovce — Alpha Reality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+<style>
+  :root{
+    --gold:#dab967;--gold-deep:#c2a04e;--gold-soft:#f3e9d2;
+    --ink:#161310;--ink-2:#211d18;--ink-soft:#4a463d;--cream:#faf6ee;--paper:#fffdf8;
+    --line:rgba(28,26,22,.10);
+    --shadow:0 24px 60px -28px rgba(40,34,18,.45);
+    --shadow-sm:0 10px 30px -18px rgba(40,34,18,.4);
+    --r:22px;--display:'Fraunces',Georgia,serif;--body:'Manrope',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gold);color:#fff}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .bg-atmos{position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:radial-gradient(900px 500px at 12% -5%, rgba(218,185,103,.20), transparent 60%),radial-gradient(700px 600px at 100% 18%, rgba(218,185,103,.12), transparent 55%),linear-gradient(180deg,#faf6ee 0%,#f6efe1 100%)}
+  .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(12px);background:rgba(22,19,16,.92);border-bottom:1px solid rgba(218,185,103,.18);transition:background .3s ease}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;transition:padding .3s ease}
+  header.shrink .nav{padding:9px 0}
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand img{height:42px;width:auto;transition:height .3s ease}
+  header.shrink .brand img{height:36px}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-weight:600;font-size:.92rem;color:rgba(250,246,238,.78);position:relative;transition:color .2s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--gold);transition:width .3s}
+  .nav-links a:hover{color:#fff}
+  .nav-links a:hover::after{width:100%}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;padding:13px 24px;border-radius:100px;font-weight:700;font-size:.9rem;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s;cursor:pointer;border:none}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -12px rgba(0,0,0,.5)}
+  .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#161310}
+  .btn svg{width:17px;height:17px}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+  .nav-toggle span{display:block;width:24px;height:2px;background:var(--gold);margin:5px 0;transition:.3s}
+
+  /* Hero */
+  .hero{position:relative;min-height:90vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;animation:slowzoom 18s ease-in-out infinite alternate}
+  @keyframes slowzoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,12,9,.45) 0%,rgba(15,12,9,.15) 35%,rgba(15,12,9,.78) 100%)}
+  .hero-inner{position:relative;z-index:1;padding:0 0 64px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:#161310;background:linear-gradient(135deg,var(--gold),var(--gold-deep));padding:9px 18px;border-radius:100px;margin-bottom:22px}
+  .eyebrow.ghost{background:var(--gold-soft);color:var(--gold-deep);border:1px solid rgba(194,160,78,.3)}
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:currentColor;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(2.5rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;margin-bottom:18px;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p{max-width:600px;font-size:1.12rem;color:rgba(250,246,238,.85);margin-bottom:30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Stat strip */
+  .stats{background:var(--ink);color:var(--cream)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .stat{padding:30px 26px;border-right:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:16px}
+  .stat:last-child{border-right:none}
+  .stat .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;flex-shrink:0;background:rgba(218,185,103,.14);color:var(--gold);border:1px solid rgba(218,185,103,.3)}
+  .stat .ic svg{width:25px;height:25px}
+  .stat .num{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1}
+  .stat .lbl{font-size:.82rem;color:rgba(250,246,238,.62)}
+  .spin-soft{transform-origin:center;animation:spinSoft 9s linear infinite}
+  @keyframes spinSoft{to{transform:rotate(360deg)}}
+  .float{animation:floaty 3.4s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .beat{animation:beat 1.8s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+
+  /* Section */
+  .sec{padding:84px 0}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 50px}
+  .sec-head .eyebrow{margin-bottom:18px}
+  .sec-head h2{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4vw,3rem);line-height:1.06;letter-spacing:-.02em}
+  .sec-head p{margin-top:16px;color:var(--ink-soft);font-size:1.05rem}
+
+  /* Project gallery band */
+  .showcase{margin-top:14px}
+  .showcase-main{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:16/8;box-shadow:var(--shadow);background:#e8ddc4}
+  .showcase-main img{width:100%;height:100%;object-fit:cover}
+  .showcase-cap{position:absolute;left:0;bottom:0;right:0;padding:30px;background:linear-gradient(0deg,rgba(15,12,9,.78),transparent);color:#fff}
+  .showcase-cap h3{font-family:var(--display);font-weight:600;font-size:1.5rem}
+  .showcase-cap p{font-size:.95rem;color:rgba(250,246,238,.82);max-width:50ch}
+  .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+  .thumb{border-radius:16px;overflow:hidden;aspect-ratio:4/3;cursor:pointer;position:relative;border:2px solid transparent;transition:border-color .25s,transform .25s}
+  .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .thumb:hover img{transform:scale(1.08)}
+  .thumb.active{border-color:var(--gold)}
+  .thumb::after{content:"";position:absolute;inset:0;background:rgba(22,19,16,.12);opacity:0;transition:opacity .25s}
+  .thumb:hover::after{opacity:1}
+
+  /* Property cards */
+  .props{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:60px}
+  .card{background:var(--paper);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-10px);box-shadow:var(--shadow)}
+  .card-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#e8ddc4}
+  .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+  .card:hover .card-media img{transform:scale(1.07)}
+  .badge{position:absolute;top:16px;left:16px;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#161310;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:100px;z-index:2}
+  .fav{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,253,248,.92);display:grid;place-items:center;z-index:2;transition:transform .2s}
+  .fav:hover{transform:scale(1.12)}
+  .fav svg{width:20px;height:20px;stroke:var(--ink-soft);fill:none;stroke-width:2;transition:.2s}
+  .fav.on svg{fill:#d8584f;stroke:#d8584f}
+  .card-body{padding:24px;display:flex;flex-direction:column;flex:1}
+  .card-loc{display:flex;align-items:center;gap:7px;font-size:.84rem;font-weight:600;color:var(--gold-deep);text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
+  .card-loc svg{width:15px;height:15px}
+  .card h3{font-family:var(--display);font-weight:600;font-size:1.34rem;line-height:1.18;margin-bottom:8px}
+  .card-desc{font-size:.93rem;color:var(--ink-soft);margin-bottom:18px}
+  .specs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .spec{display:flex;align-items:center;gap:7px;background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:.82rem;font-weight:600}
+  .spec svg{width:18px;height:18px;color:var(--gold-deep)}
+  .spec:hover svg{animation:beat 1s ease}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+  .tag{font-size:.74rem;font-weight:600;color:var(--gold-deep);background:var(--gold-soft);border-radius:8px;padding:5px 10px}
+  .card-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--line)}
+  .price{font-family:var(--display);font-weight:600;font-size:1.5rem}
+  .price small{display:block;font-family:var(--body);font-size:.72rem;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+  .card-link{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:.9rem;color:var(--ink)}
+  .card-link svg{width:17px;height:17px;transition:transform .25s}
+  .card-link:hover svg{transform:translateX(4px)}
+
+  /* Description / spec sheet */
+  .desc{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+  .desc-copy h3{font-family:var(--display);font-weight:600;font-size:1.8rem;line-height:1.14;margin-bottom:16px;letter-spacing:-.01em}
+  .desc-copy p{color:var(--ink-soft);font-size:1rem;margin-bottom:16px}
+  .desc-copy .rooms{display:inline-flex;align-items:center;gap:9px;background:var(--gold-soft);color:var(--gold-deep);border:1px solid rgba(194,160,78,.3);border-radius:100px;padding:9px 16px;font-weight:600;font-size:.9rem;margin-bottom:6px}
+  .desc-copy .rooms svg{width:17px;height:17px}
+  .spec-sheet{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:30px 32px;box-shadow:var(--shadow-sm)}
+  .spec-sheet h4{font-family:var(--display);font-weight:600;font-size:1.15rem;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .spec-sheet h4 svg{width:22px;height:22px;color:var(--gold-deep)}
+  .spec-list{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
+  .spec-list .row{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;padding-bottom:11px;border-bottom:1px solid var(--line)}
+  .spec-list .row svg{width:17px;height:17px;color:var(--gold-deep);flex-shrink:0;margin-top:3px}
+  .spec-list .row b{display:block;font-weight:700}
+  .spec-list .row span{color:var(--ink-soft)}
+
+  /* Layout / room pictograms */
+  .layout{margin-top:60px}
+  .layout-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .lay{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 16px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s,border-color .3s}
+  .lay:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--gold)}
+  .lay-ic{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;margin:0 auto 12px;background:var(--gold-soft);color:var(--gold-deep);transition:background .3s}
+  .lay:hover .lay-ic{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#fff}
+  .lay-ic svg{width:30px;height:30px}
+  .lay .n{font-family:var(--display);font-weight:600;font-size:1.15rem;line-height:1;margin-bottom:4px}
+  .lay .t{font-size:.8rem;color:var(--ink-soft);font-weight:600;line-height:1.3}
+  .lay:hover .l-bed{animation:floaty 1.8s ease-in-out infinite}
+  .lay:hover .l-sofa{animation:beat 1.4s ease-in-out infinite}
+  .lay:hover .l-bath{transform-origin:center;animation:swingS 1.4s ease-in-out infinite}
+  @keyframes swingS{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+  .lay:hover .l-tech{transform-origin:center;animation:spinSoft 3s linear infinite}
+  .lay:hover .l-smart{animation:beat 1.2s ease-in-out infinite}
+  @media(max-width:980px){.layout-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:680px){.layout-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* Lightbox */
+  .thumb,.showcase-main{cursor:zoom-in}
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(15,12,9,.94);display:none;align-items:center;justify-content:center;flex-direction:column;backdrop-filter:blur(4px)}
+  .lb.open{display:flex;animation:lbfade .25s ease}
+  @keyframes lbfade{from{opacity:0}to{opacity:1}}
+  .lb-stage{position:relative;width:92vw;max-width:1200px;height:78vh;display:flex;align-items:center;justify-content:center}
+  .lb-stage img{max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7);object-fit:contain;animation:lbpop .3s cubic-bezier(.2,.8,.2,1)}
+  @keyframes lbpop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+  .lb-cap{color:rgba(250,246,238,.92);text-align:center;margin-top:18px;max-width:60ch;padding:0 20px}
+  .lb-cap b{font-family:var(--display);font-weight:600;font-size:1.15rem;display:block;margin-bottom:4px}
+  .lb-cap span{font-size:.92rem;color:rgba(250,246,238,.62)}
+  .lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:1px solid rgba(218,185,103,.4);background:rgba(22,19,16,.6);color:var(--gold);cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s;z-index:2}
+  .lb-btn:hover{background:rgba(218,185,103,.18);transform:translateY(-50%) scale(1.08)}
+  .lb-btn svg{width:26px;height:26px}
+  .lb-prev{left:-4px}.lb-next{right:-4px}
+  .lb-close{position:absolute;top:22px;right:24px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(22,19,16,.6);color:#fff;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s;z-index:3}
+  .lb-close:hover{background:rgba(255,255,255,.12);transform:rotate(90deg)}
+  .lb-close svg{width:24px;height:24px}
+  .lb-count{position:absolute;top:28px;left:24px;color:rgba(250,246,238,.6);font-size:.85rem;font-weight:600;letter-spacing:.05em}
+  @media(max-width:980px){.desc{grid-template-columns:1fr}}
+  @media(max-width:680px){.spec-list{grid-template-columns:1fr}.lb-btn{width:44px;height:44px}.lb-prev{left:2px}.lb-next{right:2px}.lb-stage{height:64vh}}
+
+  /* Interactive aerial map */
+  .imap-wrap{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#0d0c09;margin-top:14px}
+  .imap-wrap img.base{width:100%;display:block}
+  .imap-svg{position:absolute;inset:0;width:100%;height:100%}
+  .imap-svg polygon{fill:rgba(218,185,103,0);stroke:rgba(218,185,103,0);stroke-width:2;cursor:pointer;transition:fill .3s ease,stroke .3s ease}
+  .imap-svg polygon:hover,.imap-svg polygon.on{fill:rgba(218,185,103,.42);stroke:rgba(218,185,103,.95)}
+  .imap-pin{position:absolute;transform:translate(-50%,-120%);background:rgba(22,19,16,.92);color:#fff;border:1px solid rgba(218,185,103,.5);padding:7px 14px;border-radius:100px;font-weight:700;font-size:.82rem;letter-spacing:.04em;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;z-index:3}
+  .imap-pin.show{opacity:1;transform:translate(-50%,-135%)}
+  .imap-pin b{color:var(--gold)}
+  .imap-legend{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+  .imap-legend button{display:inline-flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:10px 18px;font-family:var(--body);font-weight:600;font-size:.9rem;color:var(--ink);cursor:pointer;transition:border-color .25s,background .25s,transform .2s}
+  .imap-legend button:hover{transform:translateY(-2px)}
+  .imap-legend button.on{background:var(--gold-soft);border-color:var(--gold)}
+  .imap-legend .sw{width:14px;height:14px;border-radius:4px;background:linear-gradient(135deg,var(--gold),var(--gold-deep))}
+  .imap-hint{text-align:center;color:var(--ink-soft);font-size:.86rem;margin-top:14px}
+  .imap-hint svg{width:16px;height:16px;vertical-align:-3px;color:var(--gold-deep)}
+
+  /* 360 panorama */
+  .pano{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);margin-top:14px;aspect-ratio:16/8;background:#0d0c09}
+  #pano360{position:absolute;inset:0;width:100%;height:100%}
+  .pano .pnlm-load-box{background:#0d0c09}
+  .pano-badge{position:absolute;top:18px;left:18px;z-index:3;display:inline-flex;align-items:center;gap:9px;background:rgba(22,19,16,.78);color:#fff;border:1px solid rgba(218,185,103,.4);padding:9px 16px;border-radius:100px;font-weight:700;font-size:.8rem;letter-spacing:.05em;backdrop-filter:blur(4px);pointer-events:none}
+  .pano-badge svg{width:18px;height:18px;color:var(--gold)}
+  .pano-badge .ring{transform-origin:center;animation:spinSoft 4s linear infinite}
+  .pano-hint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:3;background:rgba(22,19,16,.7);color:rgba(250,246,238,.9);padding:8px 16px;border-radius:100px;font-size:.82rem;font-weight:600;backdrop-filter:blur(4px);transition:opacity .4s;pointer-events:none}
+
+  /* Virtual tour feature */
+  .feature{background:var(--paper);border:1px solid var(--line);border-radius:32px;padding:10px;margin-top:54px;display:grid;grid-template-columns:1.1fr .9fr;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .feature .fimg{position:relative;border-radius:24px;overflow:hidden;min-height:340px;background:#e8ddc4}
+  .feature .fimg img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+  .feature .fbody{padding:38px 40px;display:flex;flex-direction:column;justify-content:center}
+  .feature .fbody .eyebrow{margin-bottom:16px}
+  .feature .fbody h3{font-family:var(--display);font-weight:600;font-size:1.7rem;line-height:1.14;margin-bottom:12px}
+  .feature .fbody p{color:var(--ink-soft);font-size:.98rem;margin-bottom:20px}
+  .vr-cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start}
+  .vr-cta .ring{position:relative;width:18px;height:18px}
+  .vr-cta .ring::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid currentColor;border-top-color:transparent;animation:spinSoft 2s linear infinite}
+
+  /* Benefits (financovanie + pravny servis) */
+  .benefits{background:var(--ink);color:var(--cream);border-radius:36px;margin:0 28px;padding:70px 0;position:relative;overflow:hidden}
+  .benefits::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 85% 0%,rgba(218,185,103,.18),transparent 60%)}
+  .benefits .wrap{position:relative}
+  .benefits .sec-head h2{color:#fff}
+  .benefits .sec-head p{color:rgba(250,246,238,.7)}
+  .benefits .eyebrow.ghost{background:rgba(218,185,103,.14);border-color:rgba(218,185,103,.3);color:var(--gold)}
+  .ben-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:840px;margin:0 auto}
+  .ben{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:34px 30px;transition:transform .3s,background .3s,border-color .3s}
+  .ben:hover{transform:translateY(-7px);background:rgba(218,185,103,.08);border-color:rgba(218,185,103,.4)}
+  .ben-ic{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;margin-bottom:20px;background:linear-gradient(135deg,rgba(218,185,103,.22),rgba(218,185,103,.08));border:1px solid rgba(218,185,103,.3)}
+  .ben-ic svg{width:36px;height:36px;color:var(--gold)}
+  .ben h4{font-family:var(--display);font-weight:600;font-size:1.3rem;margin-bottom:10px}
+  .ben p{font-size:.96rem;color:rgba(250,246,238,.68)}
+  .ben:hover .p-shield{animation:floaty 2s ease-in-out infinite}
+  .ben:hover .p-coin{transform-origin:center;animation:flip 1.6s ease-in-out infinite}
+  @keyframes flip{0%,100%{transform:rotateY(0)}50%{transform:rotateY(180deg)}}
+
+  /* Smart-home / standard features grid */
+  .feat-head{text-align:center;max-width:680px;margin:54px auto 30px}
+  .feat-head h3{font-family:var(--display);font-weight:600;font-size:1.7rem;color:#fff;letter-spacing:-.01em}
+  .feat-head p{margin-top:10px;color:rgba(250,246,238,.66);font-size:1rem}
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:980px;margin:0 auto}
+  .feat{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px;transition:transform .3s,background .3s,border-color .3s}
+  .feat:hover{transform:translateY(-5px);background:rgba(218,185,103,.08);border-color:rgba(218,185,103,.4)}
+  .feat-ic{width:48px;height:48px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(135deg,rgba(218,185,103,.22),rgba(218,185,103,.08));border:1px solid rgba(218,185,103,.3)}
+  .feat-ic svg{width:26px;height:26px;color:var(--gold)}
+  .feat h5{font-family:var(--body);font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px}
+  .feat p{font-size:.86rem;color:rgba(250,246,238,.62);line-height:1.5}
+  .feat .badge-soon{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:rgba(218,185,103,.14);border:1px solid rgba(218,185,103,.3);border-radius:6px;padding:2px 7px;margin-top:7px}
+  .feat:hover .f-heat{animation:beat 1.3s ease-in-out infinite}
+  .feat:hover .f-bell{transform-origin:top center;animation:swing 1.2s ease-in-out infinite}
+  @keyframes swing{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+  .feat:hover .f-air{transform-origin:center;animation:spinSoft 2.4s linear infinite}
+  .feat:hover .f-cam{animation:floaty 2s ease-in-out infinite}
+  .feat:hover .f-sun{transform-origin:center;animation:spinSoft 6s linear infinite}
+  .feat:hover .f-leaf{transform-origin:bottom center;animation:swing 2s ease-in-out infinite}
+  .feat:hover .f-brick{animation:floaty 2.2s ease-in-out infinite}
+  @media(max-width:980px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.feat-grid{grid-template-columns:1fr}}
+
+  /* Location / map */
+  .loc-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:stretch}
+  .loc-copy{display:flex;flex-direction:column;justify-content:center}
+  .loc-copy h2{font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,3.5vw,2.6rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+  .loc-copy p{color:var(--ink-soft);font-size:1rem;margin-bottom:24px;max-width:46ch}
+  .dist{display:flex;flex-direction:column;gap:12px}
+  .dist-row{display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-sm)}
+  .dist-row .pin{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;background:var(--gold-soft);color:var(--gold-deep)}
+  .dist-row .pin svg{width:24px;height:24px}
+  .dist-row .city{font-family:var(--display);font-weight:600;font-size:1.05rem}
+  .dist-row .meta{font-size:.86rem;color:var(--ink-soft)}
+  .dist-row .km{margin-left:auto;text-align:right}
+  .dist-row .km b{font-family:var(--display);font-weight:600;font-size:1.15rem;display:block}
+  .dist-row .km span{font-size:.74rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+  .map-wrap{border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);min-height:380px;position:relative}
+  .map-wrap iframe{width:100%;height:100%;min-height:380px;border:0;display:block;filter:saturate(1.05)}
+
+  /* Contact */
+  .contact{padding:84px 0}
+  .contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+  .contact-copy h2{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4vw,2.9rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:18px}
+  .contact-copy p{color:var(--ink-soft);font-size:1.05rem;margin-bottom:28px;max-width:460px}
+  .agent{display:flex;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow-sm);max-width:440px}
+  .agent .av{width:60px;height:60px;border-radius:14px;flex-shrink:0;display:grid;place-items:center;background:var(--ink);padding:10px}
+  .agent .av img{width:100%;height:auto}
+  .agent .nm{font-family:var(--display);font-weight:600;font-size:1.1rem}
+  .agent .rl{font-size:.85rem;color:var(--ink-soft)}
+  .agent .ph{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--gold-deep);margin-top:5px;font-size:.92rem}
+  .agent .ph svg{width:15px;height:15px}
+  form.dopyt{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:34px;box-shadow:var(--shadow)}
+  form.dopyt h3{font-family:var(--display);font-weight:600;font-size:1.4rem;margin-bottom:6px}
+  form.dopyt .sub{font-size:.9rem;color:var(--ink-soft);margin-bottom:24px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.82rem;font-weight:700;margin-bottom:7px;color:var(--ink-soft)}
+  .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--cream);border-radius:13px;padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(218,185,103,.22)}
+  .field textarea{resize:vertical;min-height:84px}
+  form.dopyt .btn{width:100%;justify-content:center;margin-top:6px}
+  .form-note{font-size:.76rem;color:var(--ink-soft);margin-top:14px;text-align:center}
+  .form-ok{display:none;text-align:center;padding:30px 10px}
+  .form-ok.show{display:block}
+  .form-ok .check{width:64px;height:64px;border-radius:50%;background:var(--gold-soft);display:grid;place-items:center;margin:0 auto 16px}
+  .form-ok .check svg{width:34px;height:34px;color:var(--gold-deep)}
+  .form-ok h3{font-family:var(--display);font-weight:600;font-size:1.4rem;margin-bottom:8px}
+  .form-ok p{color:var(--ink-soft);font-size:.95rem}
+
+  /* Footer */
+  footer{background:var(--ink);color:rgba(250,246,238,.72);margin-top:40px;padding:54px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:36px}
+  .foot-brand img{height:46px;width:auto;margin-bottom:16px}
+  footer p{font-size:.92rem;line-height:1.7}
+  .foot-col h5{color:#fff;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px;font-weight:700}
+  .foot-col a,.foot-col span{display:block;font-size:.92rem;margin-bottom:10px;transition:color .2s}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:rgba(250,246,238,.5)}
+  .socials{display:flex;gap:12px}
+  .socials a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;transition:.25s}
+  .socials a:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-3px)}
+  .socials svg{width:18px;height:18px;color:#fff}
+
+  @media(max-width:980px){
+    .props{grid-template-columns:repeat(2,1fr)}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2){border-right:none}
+    .ben-grid{grid-template-columns:1fr}
+    .contact-grid,.loc-grid{grid-template-columns:1fr;gap:30px}
+    .feature{grid-template-columns:1fr}
+    .feature .fimg{min-height:260px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .thumbs{grid-template-columns:repeat(4,1fr)}
+  }
+  @media(max-width:680px){
+    .nav-links{position:fixed;inset:0 0 0 auto;width:80%;max-width:320px;background:var(--ink-2);flex-direction:column;align-items:flex-start;justify-content:center;gap:26px;padding:40px;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:60}
+    .nav-links.open{transform:none}
+    .nav-toggle{display:block;z-index:70}
+    .nav-toggle.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-toggle.x span:nth-child(2){opacity:0}
+    .nav-toggle.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .props,.stats-grid,.thumbs{grid-template-columns:1fr}
+    .thumbs{grid-template-columns:repeat(2,1fr)}
+    .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+    .foot-grid{grid-template-columns:1fr}
+    .benefits{margin:0 14px;border-radius:26px}
+    .wrap{padding:0 20px}
+    .showcase-cap{padding:20px}
+  }
+</style>
+</head>
+<body>
+<div class="bg-atmos"></div>
+<div class="grain"></div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#" class="brand"><img src="assets/logo.png" alt="Alpha Reality"></a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#domy">Domy</a>
+      <a href="#prehliadka">Virtuálna prehliadka</a>
+      <a href="#vyhody">Financovanie</a>
+      <a href="#lokalita">Lokalita</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#kontakt" class="btn btn-gold">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </nav>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><img src="assets/aerial-three.jpg" alt="Letecký pohľad na tri novostavby rodinných domov v Harichovciach"></div>
+  <div class="wrap hero-inner">
+    <div class="reveal in"><span class="eyebrow"><span class="dot"></span>Exkluzívne · Harichovce, okres Spišská Nová Ves</span></div>
+    <h1 class="reveal in" style="transition-delay:.08s">Tri nové domy, v ktorých <em>začne nový príbeh</em></h1>
+    <p class="reveal in" style="transition-delay:.16s">Samostatne stojace nízkoenergetické tehlové bungalovy na vlastnom oplotenom pozemku. Pokojná obec na dosah mesta, energetický certifikát A a moderné prevedenie pripravené pre vašu rodinu.</p>
+    <div class="hero-cta reveal in" style="transition-delay:.24s">
+      <a href="#domy" class="btn btn-gold">Pozrieť domy<svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#kontakt" class="btn">Dohodnúť obhliadku</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap"><div class="stats-grid">
+    <div class="stat"><div class="ic"><svg class="float" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5.2 5.7.8-4.1 4 1 5.6L12 21l-5.1 2.6 1-5.6-4.1-4 5.7-.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="rgba(218,185,103,.25)"/></svg></div><div><div class="num">Certifikát A</div><div class="lbl">nízkoenergetické domy</div></div></div>
+    <div class="stat"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><circle class="spin-soft" cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7" stroke-dasharray="4 4"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="num">2026 / 2027</div><div class="lbl">výstavba · kolaudácia</div></div></div>
+    <div class="stat"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V9l8-5 8 5v11" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path class="float" d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><div><div class="num">3 domy</div><div class="lbl">vlastný oplotený pozemok</div></div></div>
+    <div class="stat"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path class="beat" d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="rgba(218,185,103,.25)"/></svg></div><div><div class="num">#1 v regióne</div><div class="lbl">najviac pozitívnych recenzií</div></div></div>
+  </div></div>
+</section>
+
+<!-- PROJECT + GALLERY -->
+<section class="sec" id="domy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow ghost"><span class="dot"></span>Projekt Harichovce</div>
+      <h2>Tri bungalovy, jeden pokojný areál</h2>
+      <p>Samostatne stojace prízemné domy s rovnakým štandardom prevedenia. Prelistujte si vizualizácie celého projektu.</p>
+    </div>
+
+    <div class="showcase reveal">
+      <div class="showcase-main">
+        <img id="mainShot" src="assets/aerial-three.jpg" alt="Vizualizácia projektu troch domov">
+        <div class="showcase-cap"><h3 id="capTitle">Celý areál z vtáčej perspektívy</h3><p id="capText">Tri domy na vlastných oplotených pozemkoch s príjazdovou cestou a parkovaním, lemované poľami na okraji obce.</p></div>
+      </div>
+      <div class="thumbs" id="thumbs">
+        <div class="thumb active" data-img="assets/aerial-three.jpg" data-t="Celý areál z vtáčej perspektívy" data-d="Tri domy na vlastných oplotených pozemkoch s príjazdovou cestou a parkovaním, lemované poľami na okraji obce."><img src="assets/aerial-three.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/aerial-pair.jpg" data-t="Valbová strecha a škridla" data-d="Dva z domov majú elegantnú valbovú strechu z betónovej škridly a krytú vstupnú terasu s dreveným obkladom."><img src="assets/aerial-pair.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/entry-wood.jpg" data-t="Vstup s dreveným obkladom" data-d="Moderný vstup s lamelovým dreveným obkladom a veľkými oknami s izolačným trojsklom."><img src="assets/entry-wood.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/garden-pergola.jpg" data-t="Záhrada a krytá terasa" data-d="Pultová strecha s presahom tvorí krytú terasu — ideálne miesto na rodinné posedenie v súkromí záhrady."><img src="assets/garden-pergola.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/street-white-car.jpg" data-t="Príjazd a parkovanie" data-d="Spevnená príjazdová cesta a parkovacie státie pri každom dome, oddelené murovaným oplotením."><img src="assets/street-white-car.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/street-red-car.jpg" data-t="Pohľad z ulice" data-d="Čistá biela fasáda, drevené detaily a upravená predzáhradka s okrasnými trávami."><img src="assets/street-red-car.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/garden-back.jpg" data-t="Záhradná strana domu" data-d="Veľké okná orientované do záhrady prinášajú do interiéru množstvo svetla a výhľad do zelene."><img src="assets/garden-back.jpg" alt=""></div>
+        <div class="thumb" data-img="assets/garden-side.jpg" data-t="Súkromie a zeleň" data-d="Murované oplotenie po obvode pozemku zaisťuje súkromie. Pozemok je rovinatý a slnečný."><img src="assets/garden-side.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <!-- 3 cards -->
+    <div class="props">
+      <article class="card reveal">
+        <div class="card-media">
+          <img src="assets/aerial-pair.jpg" alt="Dom A — valbová strecha">
+          <span class="badge">Dom A · Exkluzívne</span>
+          <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
+          <h3>Bungalov s valbovou strechou</h3>
+          <p class="card-desc">Klasický prízemný dom s betónovou škridlou, krytým vstupom a tromi obytnými miestnosťami. Pripravený na nasťahovanie.</p>
+          <div class="specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>95 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 izby</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>500 m²</span>
+          </div>
+          <div class="tags"><span class="tag">Certifikát A</span><span class="tag">2× kúpeľňa s WC</span><span class="tag">Rekuperácia</span></div>
+          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" style="transition-delay:.1s">
+        <div class="card-media">
+          <img src="assets/garden-pergola.jpg" alt="Dom B — pultová strecha s terasou">
+          <span class="badge">Dom B · Exkluzívne</span>
+          <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
+          <h3>Moderný dom s krytou terasou</h3>
+          <p class="card-desc">Pultová strecha s presahom, drevený lamelový obklad a veľká krytá terasa do záhrady. Príprava na krb v obývačke.</p>
+          <div class="specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>95 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 izby</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>500 m²</span>
+          </div>
+          <div class="tags"><span class="tag">Trojsklo</span><span class="tag">Príprava na krb</span><span class="tag">Krytá terasa</span></div>
+          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" style="transition-delay:.2s">
+        <div class="card-media">
+          <img src="assets/street-red-car.jpg" alt="Dom C — pohľad z ulice">
+          <span class="badge">Dom C · Exkluzívne</span>
+          <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-loc"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg>Harichovce, Družstevná</div>
+          <h3>Bungalov s drevenými detailmi</h3>
+          <p class="card-desc">Čistá biela fasáda s dreveným vstupom, podlahové vykurovanie a plné napojenie na inžinierske siete. Holopriestor pre vašu úpravu.</p>
+          <div class="specs">
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>95 m²</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 izby</span>
+            <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>500 m²</span>
+          </div>
+          <div class="tags"><span class="tag">Zateplenie 150 mm</span><span class="tag">Podlahové kúrenie</span><span class="tag">Inžinierske siete</span></div>
+          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Description + spec sheet -->
+    <div class="desc reveal">
+      <div class="desc-copy">
+        <h3>O nehnuteľnosti</h3>
+        <span class="rooms"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>3 obytné miestnosti · obývačka s kuchyňou · 2× kúpeľňa s WC</span>
+        <p>Exkluzívne ponúkame na predaj novostavby rodinných domov v obci Harichovce, okres Spišská Nová Ves. Ide o samostatne stojace nízkoenergetické tehlové domy na slnečnom rovinatom pozemku.</p>
+        <p>Každý dom ponúka tri samostatné obytné miestnosti, priestrannú obývaciu izbu s kuchyňou, dve kúpeľne s WC a technickú miestnosť. V obývacej miestnosti je pripravené napojenie pre krb a v obytných miestnostiach je pripravené napojenie pre exteriérové žalúzie.</p>
+        <p>Cena nehnuteľnosti je dohodou a zahŕňa všetky poplatky spojené s prevodom vlastníckeho práva. Právny servis zabezpečujeme prostredníctvom advokátskej kancelárie a v prípade záujmu vám ponúkame bezplatné finančné poradenstvo naším odborníkom.</p>
+      </div>
+      <div class="spec-sheet">
+        <h4><svg viewBox="0 0 24 24" fill="none"><path d="M9 4h10l5 5v19H9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" transform="translate(-4,-3)"/><path d="M5 4h9l4 4v11H5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 4v4h4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Technické parametre</h4>
+        <div class="spec-list">
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/></svg><span><b>Úžitková plocha</b>95 m²</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v9h14v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Zastavaná plocha</b>128 m²</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12M4 20h16" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Pozemok</b>500 m²</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span><b>Energetický certifikát</b>trieda A</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="1.5"/></svg><span><b>Murivo</b>tehla, zateplenie 150 mm</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Strecha</b>betónová škridla, väzníkový krov</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="currentColor" stroke-width="2"/><path d="M12 3v18" stroke="currentColor" stroke-width="1.5"/></svg><span><b>Okná</b>plast, izolačné trojsklo</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v6M8 6l4 3 4-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13h14v8H5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Vykurovanie</b>podlahové elektrické</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><b>Vetranie</b>centrálna rekuperácia</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><b>Siete</b>elektrina, voda, kanalizácia</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="16" rx="1" stroke="currentColor" stroke-width="2"/><path d="M5 8h14M5 12h14M5 16h14" stroke="currentColor" stroke-width="1.5"/></svg><span><b>Príprava</b>exteriérové žalúzie</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout / room pictograms -->
+    <div class="layout">
+      <div class="layout-grid">
+        <div class="lay reveal">
+          <div class="lay-ic"><svg class="l-bed" viewBox="0 0 32 32" fill="none"><path d="M4 22V11M4 16h24v6M28 22v-6a3 3 0 00-3-3H12v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="13.5" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg></div>
+          <div class="n">3×</div><div class="t">samostatné izby</div>
+        </div>
+        <div class="lay reveal" style="transition-delay:.05s">
+          <div class="lay-ic"><svg class="l-sofa" viewBox="0 0 32 32" fill="none"><path d="M6 16v-3a3 3 0 013-3h14a3 3 0 013 3v3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 16a2 2 0 012 2v3h20v-3a2 2 0 014 0v6H4v-6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <div class="n">Obývačka</div><div class="t">s kuchyňou</div>
+        </div>
+        <div class="lay reveal" style="transition-delay:.1s">
+          <div class="lay-ic"><svg class="l-bath" viewBox="0 0 32 32" fill="none"><path d="M5 16h22v3a5 5 0 01-5 5H10a5 5 0 01-5-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 16V8a2.5 2.5 0 015 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11.5 8.5h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 24l-1.5 3M23 24l1.5 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="n">2×</div><div class="t">kúpeľňa s WC</div>
+        </div>
+        <div class="lay reveal" style="transition-delay:.15s">
+          <div class="lay-ic"><svg class="l-tech" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M16 4v3M16 25v3M28 16h-3M7 16H4M24.5 7.5l-2 2M9.5 22.5l-2 2M24.5 24.5l-2-2M9.5 9.5l-2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="n">Technická</div><div class="t">miestnosť</div>
+        </div>
+        <div class="lay reveal" style="transition-delay:.2s">
+          <div class="lay-ic"><svg viewBox="0 0 32 32" fill="none"><path d="M5 14L16 5l11 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12v12h16V12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle class="l-smart" cx="16" cy="18" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M16 18h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div class="n">Smart</div><div class="t">riešenia v základe</div>
+        </div>
+        <div class="lay reveal" style="transition-delay:.25s">
+          <div class="lay-ic"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="5" width="20" height="22" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M6 10h20M6 14h20M6 18h20M6 22h20" stroke="currentColor" stroke-width="1.5"/></svg></div>
+          <div class="n">Exter. žalúzie</div><div class="t">príprava v izbách</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE AERIAL MAP -->
+    <div class="sec-head reveal" style="margin-top:80px">
+      <div class="eyebrow ghost"><span class="dot"></span>Rozmiestnenie domov</div>
+      <h2>Interaktívny plán areálu</h2>
+      <p>Prejdite kurzorom ponad dom — podsvieti sa. Alpha 1 je dom od cesty, Alpha 2 stredný a Alpha 3 krajný vpravo.</p>
+    </div>
+
+    <div class="imap-wrap reveal" id="imapWrap">
+      <img class="base" src="assets/aerial-three.jpg" alt="Letecký plán troch domov">
+      <svg class="imap-svg" viewBox="0 0 100 56" preserveAspectRatio="none">
+        <!-- Alpha 1 — house nearest the road (left) -->
+        <polygon data-house="Alpha 1" points="29,34 36,24 45,34 37,45"></polygon>
+        <!-- Alpha 2 — middle house -->
+        <polygon data-house="Alpha 2" points="43,29 50,19 60,28 51,39"></polygon>
+        <!-- Alpha 3 — rightmost house -->
+        <polygon data-house="Alpha 3" points="57,24 64,14 74,23 65,34"></polygon>
+      </svg>
+      <div class="imap-pin" id="imapPin"></div>
+    </div>
+
+    <div class="imap-legend" id="imapLegend">
+      <button data-h="Alpha 1"><span class="sw"></span>Alpha 1 — pri ceste</button>
+      <button data-h="Alpha 2"><span class="sw"></span>Alpha 2 — stredný</button>
+      <button data-h="Alpha 3"><span class="sw"></span>Alpha 3 — vpravo</button>
+    </div>
+    <p class="imap-hint"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l4 16 2.5-7 7-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> Tip: prejdite myšou ponad strechu domu alebo ťuknite na tlačidlo nižšie.</p>
+
+    <!-- Virtual tour -->
+    <div class="feature reveal" id="prehliadka">
+      <div class="fimg"><img src="assets/garden-back.jpg" alt="Interiér / záhradná strana domu"></div>
+      <div class="fbody">
+        <div class="eyebrow ghost"><span class="dot"></span>3D virtuálna prehliadka</div>
+        <h3>Prejdite si dom z pohodlia gauča</h3>
+        <p>Kompletná 3D prehliadka vám ukáže dispozíciu, prúdenie svetla aj proporcie miestností — kedykoľvek a odkiaľkoľvek. Na osobnú obhliadku tak prídete už rozhodnutí.</p>
+        <a class="btn btn-gold vr-cta" href="https://my.matterport.com/show/?m=f26HkceUBii" target="_blank" rel="noopener"><span class="ring"></span>Spustiť virtuálnu prehliadku</a>
+      </div>
+    </div>
+
+    <!-- 360 PANORAMA -->
+    <div class="sec-head reveal" style="margin-top:80px">
+      <div class="eyebrow ghost"><span class="dot"></span>360° pohľad</div>
+      <h2>Rozhliadnite sa dookola</h2>
+      <p>Chyťte a potiahnite (alebo ťahajte prstom) — otočte sa o 360° priamo v areáli.</p>
+    </div>
+    <div class="pano reveal" id="panoSection">
+      <div id="pano360"></div>
+      <div class="pano-badge"><svg class="ring" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4"/><path d="M8 12h8M13 9l3 3-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>360° panoráma</div>
+      <div class="pano-hint" id="panoHint">↔ Ťahajte pre rozhliadnutie · koliesko = priblíženie</div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS: financovanie + pravny servis -->
+<section class="benefits" id="vyhody">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow ghost"><span class="dot"></span>Prečo tieto domy</div>
+      <h2>Moderné bývanie bez kompromisov</h2>
+      <p>Kvalitná stavba, nízke účty a smart home — plus financovanie a právny servis vybavíme za vás.</p>
+    </div>
+    <div class="ben-grid">
+      <div class="ben reveal">
+        <div class="ben-ic"><svg viewBox="0 0 32 32" fill="none"><circle class="p-coin" cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v10M13 13.5c0-1.4 1.3-2.5 3-2.5s3 .8 3 2 -1 1.8-3 2.2-3 1-3 2.3 1.3 2.5 3 2.5 3-1 3-2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4>Financovanie zdarma</h4>
+        <p>Bezplatné finančné poradenstvo naším odborníkom. Pomôžeme vám s výberom hypotéky aj s celým procesom financovania nehnuteľnosti — vrátane orientačnej mesačnej splátky.</p>
+      </div>
+      <div class="ben reveal" style="transition-delay:.1s">
+        <div class="ben-ic"><svg viewBox="0 0 32 32" fill="none"><path class="p-shield" d="M16 4l10 4v7c0 6.4-4.4 10.6-10 13C10.4 25.6 6 21.4 6 15V8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 16l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Právny servis a istota</h4>
+        <p>Zmluvy autorizované advokátskou kanceláriou a bezpečný prevod vlastníckeho práva. Cena nehnuteľnosti zahŕňa všetky poplatky spojené s prevodom — žiadne skryté náklady.</p>
+      </div>
+    </div>
+
+    <!-- Standard + smart home features -->
+    <div class="feat-head reveal">
+      <h3>Vybavenie a štandard domov</h3>
+      <p>Moderné bývanie s dôrazom na kvalitu, úspory a komfort. Domy sú pripravené ako smart home.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <div class="feat-ic"><svg class="f-brick" viewBox="0 0 32 32" fill="none"><rect x="5" y="7" width="22" height="18" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M5 13h22M5 19h22M13 7v6M19 13v6M13 19v6" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div><h5>Kvalitné materiály</h5><p>Overené značkové materiály a poctivé remeselné prevedenie — stavané, aby vydržali generácie.</p></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.06s">
+        <div class="feat-ic"><svg class="f-leaf" viewBox="0 0 32 32" fill="none"><path d="M23 7C13 7 9 15 9 23c8 0 14-4 14-14 0-1-2-2-2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 23c2-5 6-9 11-11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div><h5>Nízkoenergetická stavba</h5><p>Energetický certifikát A, zateplenie 150 mm, trojsklá a rekuperácia — nízke účty po celý rok.</p></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.12s">
+        <div class="feat-ic"><svg class="f-heat" viewBox="0 0 32 32" fill="none"><path d="M16 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="22" r="1.6" fill="currentColor"/><path d="M22 8h4M22 12h4M22 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div><h5>Ovládanie kúrenia cez telefón</h5><p>Smart termostat — teplotu v dome nastavíte odkiaľkoľvek priamo z mobilu.</p></div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat-ic"><svg viewBox="0 0 32 32" fill="none"><rect class="f-bell" x="9" y="5" width="14" height="20" rx="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 18h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div><h5>Video vrátnik v mobile</h5><p>Uvidíte, kto zvoní pri bráne, a otvoríte mu — aj keď práve nie ste doma.</p></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.06s">
+        <div class="feat-ic"><svg viewBox="0 0 32 32" fill="none"><circle class="f-air" cx="16" cy="16" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M16 13c0-4 1-7 3-7s2 3-1 5M19 16c4 0 7 1 7 3s-3 2-5-1M16 19c0 4-1 7-3 7s-2-3 1-5M13 16c-4 0-7-1-7-3s3-2 5 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div><h5>Rekuperácia cez telefón</h5><p>Riadené vetranie s rekuperáciou tepla — čerstvý vzduch a kontrola vlhkosti priamo z aplikácie.</p></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.12s">
+        <div class="feat-ic"><svg class="f-cam" viewBox="0 0 32 32" fill="none"><rect x="5" y="10" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M21 14l6-3v10l-6-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="11" cy="16" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div><h5>Príprava na kamerový systém</h5><p>Predpripravené rozvody pre bezpečnostné kamery — stačí doplniť zariadenia podľa vašich potrieb.</p><span class="badge-soon">Pripravené</span></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.18s">
+        <div class="feat-ic"><svg viewBox="0 0 32 32" fill="none"><circle class="f-sun" cx="16" cy="11" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M16 3v2M16 17v2M8 11H6M26 11h-2M10.5 5.5l1.4 1.4M21.5 5.5l-1.4 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 22h14l2 6H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <div><h5>Príprava na fotovoltiku</h5><p>Dom je pripravený na fotovoltickú elektráreň — vlastnú zelenú energiu pridáte kedykoľvek neskôr.</p><span class="badge-soon">Pripravené</span></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.24s">
+        <div class="feat-ic"><svg viewBox="0 0 32 32" fill="none"><rect x="6" y="6" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h5>Smart home v základe</h5><p>Inteligentná domácnosť prepojená so smartfónom — kúrenie, vetranie aj vrátnik na jednom mieste.</p></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.3s">
+        <div class="feat-ic"><svg viewBox="0 0 32 32" fill="none"><rect x="7" y="5" width="18" height="20" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 10h18M7 14h18M7 18h18M7 22h18" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div><h5>Príprava na exteriérové žalúzie</h5><p>V obytných miestnostiach pripravené rozvody pre vonkajšie žalúzie — tienenie a súkromie podľa potreby.</p><span class="badge-soon">Pripravené</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION + MAP -->
+<section class="sec" id="lokalita">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow ghost"><span class="dot"></span>Kde domy nájdete</div>
+      <h2>Harichovce — pokoj na dosah mesta</h2>
+      <p>Pokojná obec s plnou občianskou vybavenosťou, odkiaľ ste v centre mesta za pár minút autom.</p>
+    </div>
+    <div class="loc-grid reveal">
+      <div class="loc-copy">
+        <h2>Výborná dostupnosť</h2>
+        <p>Harichovce ležia priamo pri Spišskej Novej Vsi a v dosahu Levoče. Vychutnáte si výhody bývania na vidieku, no s mestom doslova za rohom.</p>
+        <div class="dist">
+          <div class="dist-row">
+            <div class="pin"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div><div class="city">Spišská Nová Ves</div><div class="meta">okresné mesto · kompletná vybavenosť</div></div>
+            <div class="km"><b>cca 5 min</b><span>autom</span></div>
+          </div>
+          <div class="dist-row">
+            <div class="pin"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.4-6-9a6 6 0 0112 0c0 4.6-6 9-6 9z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div><div class="city">Levoča</div><div class="meta">historické mesto UNESCO</div></div>
+            <div class="km"><b>cca 10 min</b><span>autom</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap reveal" style="transition-delay:.1s">
+        <iframe title="Mapa — Harichovce" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+          src="https://www.google.com/maps?q=Harichovce,%20Slovensko&hl=sk&z=12&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-copy reveal">
+        <div class="eyebrow ghost"><span class="dot"></span>Dohodnime si obhliadku</div>
+        <h2>Páči sa vám niektorý dom? Ozvite sa.</h2>
+        <p>Napíšte nám, o ktorý dom máte záujem, a my sa vám ozveme s termínom obhliadky. Radi poradíme aj s financovaním.</p>
+        <div class="agent">
+          <div class="av"><img src="assets/logo.png" alt="Alpha Reality"></div>
+          <div>
+            <div class="nm">Alpha Reality s.r.o.</div>
+            <div class="rl">realitná kancelária · Spišská Nová Ves</div>
+            <a href="tel:+421915140759" class="ph"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>+421 915 140 759</a>
+          </div>
+        </div>
+      </div>
+      <form class="dopyt reveal" id="dopytForm" style="transition-delay:.1s">
+        <div id="formInner">
+          <h3>Nezáväzný dopyt</h3>
+          <p class="sub">Vyplňte formulár a ozveme sa vám čo najskôr.</p>
+          <div class="field"><label for="meno">Meno a priezvisko</label><input id="meno" type="text" placeholder="Vaše meno" required></div>
+          <div class="field"><label for="tel">Telefón</label><input id="tel" type="tel" placeholder="+421 9xx xxx xxx" required></div>
+          <div class="field"><label for="email">E-mail</label><input id="email" type="email" placeholder="vas@email.sk"></div>
+          <div class="field"><label for="dom">O ktorý dom máte záujem?</label>
+            <select id="dom"><option>Dom A — valbová strecha</option><option>Dom B — krytá terasa</option><option>Dom C — drevené detaily</option><option>Zatiaľ neviem, poraďte mi</option></select>
+          </div>
+          <div class="field"><label for="sprava">Správa (nepovinné)</label><textarea id="sprava" placeholder="Napíšte nám, kedy by vám vyhovovala obhliadka…"></textarea></div>
+          <button type="submit" class="btn btn-gold">Odoslať dopyt<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <p class="form-note">Odoslaním súhlasíte so spracovaním osobných údajov za účelom vybavenia dopytu.</p>
+        </div>
+        <div class="form-ok" id="formOk">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4 10-11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Ďakujeme!</h3>
+          <p>Váš dopyt sme prijali. Ozveme sa vám čo najskôr na uvedený kontakt.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><img src="assets/logo.png" alt="Alpha Reality"></div>
+        <p>Realitná kancelária pre náročných. Sprostredkovanie predaja, prenájmu a výkup nehnuteľností v okresoch Spišská Nová Ves a Levoča.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Kontakt</h5>
+        <a href="tel:+421915140759">+421 915 140 759</a>
+        <a href="mailto:info@alphareality.sk">info@alphareality.sk</a>
+        <span>Hviezdoslavova 8, 052 01<br>Spišská Nová Ves</span>
+        <span>Po – Pi: 8:00 – 16:30</span>
+      </div>
+      <div class="foot-col">
+        <h5>Navigácia</h5>
+        <a href="#domy">Domy</a>
+        <a href="#prehliadka">Virtuálna prehliadka</a>
+        <a href="#vyhody">Financovanie</a>
+        <a href="#lokalita">Lokalita</a>
+        <a href="https://www.alphareality.sk/" target="_blank" rel="noopener">alphareality.sk</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Alpha Reality s.r.o. · IČO: 50 801 457</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/alpharealit" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3a4 4 0 00-4 4v2H8v3h2v6h3v-6h3l1-3h-4v-2a1 1 0 011-1z"/></svg></a>
+        <a href="https://www.instagram.com/alphareality.sk/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg></a>
+        <a href="https://www.youtube.com/@alpharealitysk" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="3.5" stroke="currentColor" stroke-width="2"/><path d="M11 9.5l4 2.5-4 2.5z" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <div class="lb-count" id="lbCount"></div>
+  <button class="lb-close" id="lbClose" aria-label="Zavrieť"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <div class="lb-stage">
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Predošlá"><svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <img id="lbImg" src="" alt="">
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Ďalšia"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <div class="lb-cap"><b id="lbTitle"></b><span id="lbText"></span></div>
+</div>
+
+<script>
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('shrink',scrollY>20));
+  const tg=document.getElementById('navtoggle'),nl=document.getElementById('navlinks');
+  tg.addEventListener('click',()=>{nl.classList.toggle('open');tg.classList.toggle('x')});
+  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nl.classList.remove('open');tg.classList.remove('x')}));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('.fav').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();b.classList.toggle('on')}));
+  // gallery + lightbox
+  const main=document.getElementById('mainShot'),capT=document.getElementById('capTitle'),capD=document.getElementById('capText');
+  const thumbs=[...document.querySelectorAll('#thumbs .thumb')];
+  const slides=thumbs.map(t=>({img:t.dataset.img,t:t.dataset.t,d:t.dataset.d}));
+  let cur=0;
+  function setMain(i){
+    cur=i;
+    thumbs.forEach(x=>x.classList.remove('active'));
+    thumbs[i].classList.add('active');
+    main.src=slides[i].img;capT.textContent=slides[i].t;capD.textContent=slides[i].d;
+  }
+  thumbs.forEach((t,i)=>t.addEventListener('click',()=>{setMain(i);openLb(i)}));
+
+  const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),
+        lbTitle=document.getElementById('lbTitle'),lbText=document.getElementById('lbText'),
+        lbCount=document.getElementById('lbCount');
+  function showLb(i){
+    cur=(i+slides.length)%slides.length;
+    lbImg.src=slides[cur].img;lbTitle.textContent=slides[cur].t;lbText.textContent=slides[cur].d;
+    lbCount.textContent=(cur+1)+' / '+slides.length;
+    setMain(cur);
+  }
+  function openLb(i){showLb(i);lb.classList.add('open');document.body.style.overflow='hidden'}
+  function closeLb(){lb.classList.remove('open');document.body.style.overflow=''}
+  document.getElementById('mainShot').addEventListener('click',()=>openLb(cur));
+  document.getElementById('lbPrev').addEventListener('click',e=>{e.stopPropagation();showLb(cur-1)});
+  document.getElementById('lbNext').addEventListener('click',e=>{e.stopPropagation();showLb(cur+1)});
+  document.getElementById('lbClose').addEventListener('click',closeLb);
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+  addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')closeLb();
+    if(e.key==='ArrowLeft')showLb(cur-1);
+    if(e.key==='ArrowRight')showLb(cur+1);
+  });
+  // form
+  const form=document.getElementById('dopytForm');
+  form.addEventListener('submit',e=>{e.preventDefault();document.getElementById('formInner').style.display='none';document.getElementById('formOk').classList.add('show')});
+
+  // interactive aerial map
+  (function(){
+    const wrap=document.getElementById('imapWrap');
+    if(!wrap)return;
+    const polys=[...wrap.querySelectorAll('polygon')];
+    const pin=document.getElementById('imapPin');
+    const legendBtns=[...document.querySelectorAll('#imapLegend button')];
+    function centroid(poly){
+      const pts=poly.getAttribute('points').trim().split(/\s+/).map(p=>p.split(',').map(Number));
+      let x=0,y=0;pts.forEach(p=>{x+=p[0];y+=p[1]});return {x:x/pts.length,y:y/pts.length};
+    }
+    function activate(name){
+      polys.forEach(p=>{
+        const on=p.dataset.house===name;
+        p.classList.toggle('on',on);
+        if(on){
+          const c=centroid(p);
+          pin.style.left=c.x+'%';pin.style.top=c.y+'%';
+          pin.innerHTML='<b>'+name+'</b>';
+          pin.classList.add('show');
+        }
+      });
+      legendBtns.forEach(b=>b.classList.toggle('on',b.dataset.h===name));
+    }
+    function clear(){polys.forEach(p=>p.classList.remove('on'));pin.classList.remove('show');legendBtns.forEach(b=>b.classList.remove('on'));}
+    polys.forEach(p=>{
+      p.addEventListener('mouseenter',()=>activate(p.dataset.house));
+      p.addEventListener('mouseleave',clear);
+    });
+    legendBtns.forEach(b=>{
+      b.addEventListener('mouseenter',()=>activate(b.dataset.h));
+      b.addEventListener('mouseleave',clear);
+      b.addEventListener('click',()=>activate(b.dataset.h));
+    });
+  })();
+
+  // 360 panorama via Pannellum (real spherical viewer)
+  (function(){
+    const el=document.getElementById('pano360');
+    if(!el||typeof pannellum==='undefined')return;
+    const SRC=window.PANO_SRC||"assets/pano360.jpg";
+    function init(){
+      pannellum.viewer('pano360',{
+        type:'equirectangular',
+        panorama:SRC,
+        autoLoad:true,
+        autoRotate:-2,
+        showControls:true,
+        showFullscreenCtrl:true,
+        showZoomCtrl:true,
+        hfov:100,
+        minHfov:50,
+        maxHfov:120,
+        compass:false,
+        backgroundColor:[13,12,9]
+      });
+    }
+    // init when scrolled into view (saves resources)
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){init();io.disconnect();}})},{threshold:.2});
+    io.observe(document.getElementById('panoSection'));
+  })();
+</script>
+</body>
+</html>
