@@ -166,8 +166,6 @@
   @keyframes swingS{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
   .lay:hover .l-tech{transform-origin:center;animation:spinSoft 3s linear infinite}
   .lay:hover .l-smart{animation:beat 1.2s ease-in-out infinite}
-  @media(max-width:980px){.layout-grid{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:680px){.layout-grid{grid-template-columns:repeat(2,1fr)}}
 
   /* Floor plan feature */
   .fp{background:var(--paper);border:1px solid var(--line);border-radius:32px;padding:10px;margin-top:54px;display:grid;grid-template-columns:.95fr 1.05fr;overflow:hidden;box-shadow:var(--shadow)}
@@ -201,8 +199,7 @@
   .lb-close:hover{background:rgba(255,255,255,.12);transform:rotate(90deg)}
   .lb-close svg{width:24px;height:24px}
   .lb-count{position:absolute;top:28px;left:24px;color:rgba(250,246,238,.6);font-size:.85rem;font-weight:600;letter-spacing:.05em}
-  @media(max-width:980px){.desc{grid-template-columns:1fr}}
-  @media(max-width:680px){.spec-list{grid-template-columns:1fr}.lb-btn{width:44px;height:44px}.lb-prev{left:2px}.lb-next{right:2px}.lb-stage{height:64vh}}
+  @media(max-width:680px){.spec-list{grid-template-columns:1fr}}
 
   /* Interactive aerial map */
   .imap-wrap{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#0d0c09;margin-top:14px}
@@ -280,8 +277,6 @@
   .feat:hover .f-sun{transform-origin:center;animation:spinSoft 6s linear infinite}
   .feat:hover .f-leaf{transform-origin:bottom center;animation:swing 2s ease-in-out infinite}
   .feat:hover .f-brick{animation:floaty 2.2s ease-in-out infinite}
-  @media(max-width:980px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:680px){.feat-grid{grid-template-columns:1fr}}
 
   /* Location / map */
   .loc-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:stretch}
@@ -351,8 +346,14 @@
     .contact-grid,.loc-grid{grid-template-columns:1fr;gap:30px}
     .feature{grid-template-columns:1fr}
     .feature .fimg{min-height:260px}
+    .fp{grid-template-columns:1fr}
+    .fp .fp-img{min-height:280px}
+    .fp .fp-body{padding:28px 24px}
     .foot-grid{grid-template-columns:1fr 1fr}
     .thumbs{grid-template-columns:repeat(4,1fr)}
+    .desc{grid-template-columns:1fr}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .layout-grid{grid-template-columns:repeat(4,1fr)}
   }
   @media(max-width:680px){
     .nav-links{position:fixed;inset:0 0 0 auto;width:80%;max-width:320px;background:var(--ink-2);flex-direction:column;align-items:flex-start;justify-content:center;gap:26px;padding:40px;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:60}
@@ -361,13 +362,98 @@
     .nav-toggle.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
     .nav-toggle.x span:nth-child(2){opacity:0}
     .nav-toggle.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-    .props,.stats-grid,.thumbs{grid-template-columns:1fr}
-    .thumbs{grid-template-columns:repeat(2,1fr)}
+    .props{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr}
+    .thumbs{grid-template-columns:repeat(3,1fr)}
     .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
     .foot-grid{grid-template-columns:1fr}
     .benefits{margin:0 14px;border-radius:26px}
-    .wrap{padding:0 20px}
-    .showcase-cap{padding:20px}
+    .wrap{padding:0 16px}
+
+    /* Showcase / gallery mobile */
+    .showcase-main{aspect-ratio:4/3;border-radius:18px}
+    .showcase-cap{padding:16px}
+    .showcase-cap h3{font-size:1.1rem}
+    .showcase-cap p{font-size:.82rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    /* Property cards mobile */
+    .card{border-radius:18px}
+    .card-media{aspect-ratio:16/10}
+    .card-body{padding:18px}
+    .card h3{font-size:1.2rem}
+    .card-desc{font-size:.88rem}
+    .specs{gap:6px}
+    .spec{padding:7px 10px;font-size:.78rem}
+    .tags{gap:5px}
+    .tag{font-size:.7rem;padding:4px 8px}
+    .price{font-size:1.3rem}
+
+    /* Description + spec sheet mobile */
+    .desc{gap:24px}
+    .desc-copy h3{font-size:1.4rem}
+    .desc-copy .rooms{font-size:.8rem;padding:7px 12px;flex-wrap:wrap;border-radius:14px}
+    .spec-sheet{padding:22px 18px}
+    .spec-list{grid-template-columns:1fr}
+    .spec-list .row{font-size:.85rem;gap:8px}
+
+    /* Floor plan mobile */
+    .fp{border-radius:22px;padding:8px}
+    .fp .fp-img{min-height:220px;padding:12px;border-radius:16px}
+    .fp .fp-body{padding:22px 18px}
+    .fp .fp-body h3{font-size:1.3rem}
+    .fp-rooms .r{font-size:.74rem;padding:4px 8px}
+
+    /* Feature (3D tour) mobile */
+    .feature{grid-template-columns:1fr;border-radius:22px;padding:8px}
+    .feature .fimg{min-height:200px;border-radius:16px}
+    .feature .fbody{padding:22px 18px}
+    .feature .fbody h3{font-size:1.3rem}
+
+    /* Pano mobile */
+    .pano{border-radius:18px;aspect-ratio:4/3}
+
+    /* Map mobile */
+    .map-wrap{min-height:280px;border-radius:18px}
+    .map-wrap iframe{min-height:280px}
+    .dist-row{padding:12px 14px;gap:10px}
+    .dist-row .city{font-size:.95rem}
+    .dist-row .km b{font-size:1rem}
+
+    /* Benefits mobile */
+    .ben{padding:24px 20px}
+    .feat-grid{grid-template-columns:1fr}
+    .feat{padding:18px}
+    .feat-ic{width:42px;height:42px;border-radius:11px}
+    .feat-ic svg{width:22px;height:22px}
+    .feat h5{font-size:.92rem}
+    .feat p{font-size:.82rem}
+
+    /* Contact mobile */
+    form.dopyt{border-radius:22px;padding:24px 20px}
+
+    /* Lightbox mobile */
+    .lb-btn{width:44px;height:44px}
+    .lb-prev{left:2px}
+    .lb-next{right:2px}
+    .lb-stage{height:60vh;width:96vw}
+    .lb-cap b{font-size:1rem}
+    .lb-cap span{font-size:.82rem}
+
+    /* Layout pictograms mobile */
+    .layout-grid{grid-template-columns:repeat(2,1fr)}
+    .lay{padding:16px 12px}
+    .lay-ic{width:44px;height:44px}
+    .lay .n{font-size:1rem}
+    .lay .t{font-size:.74rem}
+
+    /* Hero mobile */
+    .hero h1{font-size:clamp(2rem,7vw,3rem)}
+    .hero p{font-size:1rem}
+
+    /* Sections spacing mobile */
+    .sec{padding:56px 0}
+    .sec-head{margin-bottom:36px}
+    .sec-head h2{font-size:clamp(1.6rem,5vw,2.2rem)}
   }
 </style>
 </head>
