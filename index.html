@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tri nové 4-izbové rodinné domy v Harichovciach · nízkoenergetická stavba, certifikát A, smart home · pozemky 461–590 m² · Alpha Reality">
+<meta property="og:title" content="Projekt Harichovce — 3 nové rodinné domy | Alpha Reality">
+<meta property="og:description" content="Nízkoenergetické 4-izbové bungalovy na vlastných oplotených pozemkoch. Certifikát A, smart home, rekuperácia. Od 150 €/mes.">
+<meta property="og:image" content="assets/aerial-three.jpg">
+<link rel="icon" type="image/png" href="assets/logo.png">
 <title>Novostavby rodinných domov, Harichovce — Alpha Reality</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,8 +51,8 @@
   .btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -12px rgba(0,0,0,.5)}
   .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#161310}
   .btn svg{width:17px;height:17px}
-  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
-  .nav-toggle span{display:block;width:24px;height:2px;background:var(--gold);margin:5px 0;transition:.3s}
+  .nav-cta{flex-shrink:0}
+  .nav-cta svg{width:17px;height:17px}
 
   /* Hero */
   .hero{position:relative;min-height:90vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
@@ -92,8 +97,8 @@
 
   /* Project gallery band */
   .showcase{margin-top:14px}
-  .showcase-main{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:16/8;box-shadow:var(--shadow);background:#e8ddc4}
-  .showcase-main img{width:100%;height:100%;object-fit:cover}
+  .showcase-main{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:16/8;box-shadow:var(--shadow);background:#0d0c09}
+  .showcase-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
   .showcase-cap{position:absolute;left:0;bottom:0;right:0;padding:30px;background:linear-gradient(0deg,rgba(15,12,9,.78),transparent);color:#fff}
   .showcase-cap h3{font-family:var(--display);font-weight:600;font-size:1.5rem}
   .showcase-cap p{font-size:.95rem;color:rgba(250,246,238,.82);max-width:50ch}
@@ -206,15 +211,13 @@
   /* Interactive aerial map */
   .imap-wrap{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#0d0c09;margin-top:14px}
   .imap-wrap img.base{width:100%;display:block}
-  .imap-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-  .imap-svg polygon{fill:rgba(218,185,103,0);stroke:rgba(218,185,103,0);stroke-width:.5;transition:fill .3s ease,stroke .3s ease}
-  .imap-svg polygon.on{fill:rgba(218,185,103,.45);stroke:rgba(218,185,103,1)}
+  .imap-svg{display:none}
   /* numbered markers */
   .imap-marker{position:absolute;transform:translate(-50%,-50%);z-index:4;cursor:pointer;display:grid;place-items:center}
   .imap-marker .pinwrap{position:relative;display:grid;place-items:center;transition:transform .25s}
   .imap-marker:hover .pinwrap,.imap-marker.on .pinwrap{transform:scale(1.15)}
-  .imap-marker .circle{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));border:3px solid #fff;box-shadow:0 6px 18px -4px rgba(0,0,0,.6);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:1.05rem;color:#1c1a16}
-  .imap-marker .ping{position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);animation:pingA 2s ease-out infinite}
+  .imap-marker .circle{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));border:3px solid #fff;box-shadow:0 6px 18px -4px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:1.1rem;line-height:1;color:#1c1a16;text-align:center;padding-bottom:1px}
+  .imap-marker .ping{position:absolute;top:50%;left:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:2px solid var(--gold);animation:pingA 2s ease-out infinite}
   @keyframes pingA{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.2);opacity:0}}
   .imap-marker.on .circle{background:#fff;color:var(--gold-deep);border-color:var(--gold)}
   /* info card popup */
@@ -330,8 +333,8 @@
   .contact-copy h2{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4vw,2.9rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:18px}
   .contact-copy p{color:var(--ink-soft);font-size:1.05rem;margin-bottom:28px;max-width:460px}
   .agent{display:flex;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow-sm);max-width:440px}
-  .agent .av{width:60px;height:60px;border-radius:14px;flex-shrink:0;display:grid;place-items:center;background:var(--ink);padding:10px}
-  .agent .av img{width:100%;height:auto}
+  .agent .av{width:76px;height:76px;border-radius:16px;flex-shrink:0;overflow:hidden;background:var(--ink)}
+  .agent .av img{width:100%;height:100%;object-fit:cover;object-position:center top}
   .agent .nm{font-family:var(--display);font-weight:600;font-size:1.1rem}
   .agent .rl{font-size:.85rem;color:var(--ink-soft)}
   .agent .ph{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--gold-deep);margin-top:5px;font-size:.92rem}
@@ -386,12 +389,8 @@
     .layout-grid{grid-template-columns:repeat(4,1fr)}
   }
   @media(max-width:680px){
-    .nav-links{position:fixed;inset:0 0 0 auto;width:80%;max-width:320px;background:var(--ink-2);flex-direction:column;align-items:flex-start;justify-content:center;gap:26px;padding:40px;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:60}
-    .nav-links.open{transform:none}
-    .nav-toggle{display:block;z-index:70}
-    .nav-toggle.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .nav-toggle.x span:nth-child(2){opacity:0}
-    .nav-toggle.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .nav-links{display:none}
+    .nav-cta{padding:10px 18px;font-size:.85rem}
     .props{grid-template-columns:1fr}
     .stats-grid{grid-template-columns:1fr}
     .thumbs{grid-template-columns:repeat(3,1fr)}
@@ -401,8 +400,8 @@
     .wrap{padding:0 16px}
 
     /* Showcase / gallery mobile */
-    .showcase-main{aspect-ratio:auto;height:auto;border-radius:18px}
-    .showcase-main img{position:relative;height:auto;width:100%;display:block}
+    .showcase-main{aspect-ratio:16/10;height:auto;border-radius:18px;background:#0d0c09}
+    .showcase-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
     .showcase-cap{padding:14px}
     .showcase-cap h3{font-size:1.05rem}
     .showcase-cap p{font-size:.8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -504,9 +503,8 @@
       <a href="#vyhody">Financovanie</a>
       <a href="#lokalita">Lokalita</a>
       <a href="#kontakt">Kontakt</a>
-      <a href="#kontakt" class="btn btn-gold">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </nav>
-    <button class="nav-toggle" id="navtoggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="#kontakt" class="btn btn-gold nav-cta">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </header>
 
@@ -631,6 +629,7 @@
         <span class="rooms"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M6 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="2"/></svg>4-izbový dom · ob. hala s jedálňou a kuchyňou · 2× kúpeľňa s WC · šatník</span>
         <p>Exkluzívne ponúkame na predaj novostavby rodinných domov v obci Harichovce, okres Spišská Nová Ves. Ide o samostatne stojace nízkoenergetické tehlové domy na slnečnom rovinatom pozemku.</p>
         <p>Každý dom ponúka štyri izby (spálňa, 2× detská izba, šatník), priestrannú obývaciu halu s jedálňou, kuchyňu, dve kúpeľne s WC, technickú miestnosť, chodbu a zádverie. V podkroví je bonus — veľký úložný priestor. V obývacej miestnosti je pripravené napojenie pre krb a v obytných miestnostiach je pripravené napojenie pre exteriérové žalúzie.</p>
+        <p>Domy sú energeticky úsporné — certifikát triedy A, zateplenie 150 mm, izolačné trojsklá, centrálna rekuperácia, podlahové vykurovanie a ohrev vody bojlerom s integrovaným tepelným čerpadlom. Vďaka tomu sú náklady na bývanie nízke po celý rok.</p>
         <p>Cena nehnuteľnosti je dohodou a zahŕňa všetky poplatky spojené s prevodom vlastníckeho práva. Právny servis zabezpečujeme prostredníctvom advokátskej kancelárie a v prípade záujmu vám ponúkame bezplatné finančné poradenstvo naším odborníkom.</p>
       </div>
       <div class="spec-sheet">
@@ -645,6 +644,7 @@
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1.5" stroke="currentColor" stroke-width="2"/><path d="M12 3v18" stroke="currentColor" stroke-width="1.5"/></svg><span><b>Okná</b>plast, izolačné trojsklo</span></div>
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v6M8 6l4 3 4-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13h14v8H5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Vykurovanie</b>podlahové elektrické</span></div>
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><b>Vetranie</b>centrálna rekuperácia</span></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3" width="10" height="18" rx="5" stroke="currentColor" stroke-width="2"/><path d="M12 8v3M10 14h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span><b>Ohrev vody</b>bojler s tepelným čerpadlom</span></div>
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><b>Siete</b>elektrina, voda, kanalizácia</span></div>
           <div class="row"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="16" rx="1" stroke="currentColor" stroke-width="2"/><path d="M5 8h14M5 12h14M5 16h14" stroke="currentColor" stroke-width="1.5"/></svg><span><b>Príprava</b>exteriérové žalúzie</span></div>
         </div>
@@ -728,9 +728,9 @@
         <polygon data-house="Alpha 3" points="44,27 60,11 76,21 58,40"></polygon>
       </svg>
       <!-- numbered markers positioned on each house -->
-      <div class="imap-marker" data-house="Alpha 1" style="left:28%;top:55%"><div class="pinwrap"><span class="ping"></span><span class="circle">1</span></div></div>
-      <div class="imap-marker" data-house="Alpha 2" style="left:46%;top:42%"><div class="pinwrap"><span class="ping"></span><span class="circle">2</span></div></div>
-      <div class="imap-marker" data-house="Alpha 3" style="left:60%;top:33%"><div class="pinwrap"><span class="ping"></span><span class="circle">3</span></div></div>
+      <div class="imap-marker" data-house="Alpha 1" style="left:25%;top:50%"><div class="pinwrap"><span class="ping"></span><span class="circle">1</span></div></div>
+      <div class="imap-marker" data-house="Alpha 2" style="left:40%;top:41%"><div class="pinwrap"><span class="ping"></span><span class="circle">2</span></div></div>
+      <div class="imap-marker" data-house="Alpha 3" style="left:55%;top:32%"><div class="pinwrap"><span class="ping"></span><span class="circle">3</span></div></div>
       <!-- info card -->
       <div class="imap-card" id="imapCard"></div>
     </div>
@@ -820,7 +820,7 @@
       </div>
       <div class="feat reveal" style="transition-delay:.06s">
         <div class="feat-ic"><svg class="f-leaf" viewBox="0 0 32 32" fill="none"><path d="M23 7C13 7 9 15 9 23c8 0 14-4 14-14 0-1-2-2-2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 23c2-5 6-9 11-11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <div><h5>Nízkoenergetická stavba</h5><p>Energetický certifikát A, zateplenie 150 mm, trojsklá a rekuperácia — nízke účty po celý rok.</p></div>
+        <div><h5>Nízkoenergetická stavba</h5><p>Certifikát A, zateplenie 150 mm, trojsklá, rekuperácia a bojler s tepelným čerpadlom — nízke účty po celý rok.</p></div>
       </div>
       <div class="feat reveal" style="transition-delay:.12s">
         <div class="feat-ic"><svg class="f-heat" viewBox="0 0 32 32" fill="none"><path d="M16 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="22" r="5" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="22" r="1.6" fill="currentColor"/><path d="M22 8h4M22 12h4M22 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
@@ -849,6 +849,10 @@
       <div class="feat reveal" style="transition-delay:.3s">
         <div class="feat-ic"><svg viewBox="0 0 32 32" fill="none"><rect x="7" y="5" width="18" height="20" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 10h18M7 14h18M7 18h18M7 22h18" stroke="currentColor" stroke-width="1.5"/></svg></div>
         <div><h5>Príprava na exteriérové žalúzie</h5><p>V obytných miestnostiach pripravené rozvody pre vonkajšie žalúzie — tienenie a súkromie podľa potreby.</p><span class="badge-soon">Pripravené</span></div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.36s">
+        <div class="feat-ic"><svg viewBox="0 0 32 32" fill="none"><rect x="11" y="4" width="10" height="24" rx="5" stroke="currentColor" stroke-width="1.8"/><path d="M16 10v5M13 18h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M24 11c2 0 3 1.5 3 3s-1 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div><h5>Úsporný ohrev vody</h5><p>Bojler s integrovaným tepelným čerpadlom — teplá voda s výrazne nižšou spotrebou energie.</p></div>
       </div>
     </div>
   </div>
@@ -900,10 +904,10 @@
         <h2>Páči sa vám niektorý dom? Ozvite sa.</h2>
         <p>Napíšte nám, o ktorý dom máte záujem, a my sa vám ozveme s termínom obhliadky. Radi poradíme aj s financovaním.</p>
         <div class="agent">
-          <div class="av"><img src="assets/logo.png" alt="Alpha Reality"></div>
+          <div class="av"><img src="assets/martin.jpg" alt="Martin Augustiňák, RSc."></div>
           <div>
-            <div class="nm">Alpha Reality s.r.o.</div>
-            <div class="rl">realitná kancelária · Spišská Nová Ves</div>
+            <div class="nm">Martin Augustiňák, RSc.</div>
+            <div class="rl">konateľ Alpha Reality · 16 rokov praxe v realitách</div>
             <a href="tel:+421915140759" class="ph"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>+421 915 140 759</a>
           </div>
         </div>
@@ -981,9 +985,6 @@
 <script>
   const hdr=document.getElementById('hdr');
   addEventListener('scroll',()=>hdr.classList.toggle('shrink',scrollY>20));
-  const tg=document.getElementById('navtoggle'),nl=document.getElementById('navlinks');
-  tg.addEventListener('click',()=>{nl.classList.toggle('open');tg.classList.toggle('x')});
-  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nl.classList.remove('open');tg.classList.remove('x')}));
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   document.querySelectorAll('.fav').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();b.classList.toggle('on')}));
@@ -997,6 +998,8 @@
     thumbs.forEach(x=>x.classList.remove('active'));
     thumbs[i].classList.add('active');
     main.src=slides[i].img;capT.textContent=slides[i].t;capD.textContent=slides[i].d;
+    // floor plan (png) shown fully, photos cropped to fill
+    main.style.objectFit = slides[i].img.endsWith('.png') ? 'contain' : 'cover';
   }
   thumbs.forEach((t,i)=>t.addEventListener('click',()=>{setMain(i);openLb(i)}));
 
