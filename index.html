@@ -2,6 +2,7 @@
 <html lang="sk">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#1c1a16">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Tri nové 4-izbové rodinné domy v Harichovciach · nízkoenergetická stavba, certifikát A, smart home · pozemky 461–590 m² · Alpha Reality">
 <meta property="og:title" content="Projekt Harichovce — 3 nové rodinné domy | Alpha Reality">
@@ -11,6 +12,9 @@
 <title>Novostavby rodinných domov, Harichovce — Alpha Reality</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
@@ -24,7 +28,7 @@
     --r:22px;--display:'Fraunces',Georgia,serif;--body:'Manrope',system-ui,sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-behavior:smooth}
   body{font-family:var(--body);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--gold);color:#fff}
   a{color:inherit;text-decoration:none}
@@ -209,7 +213,7 @@
   @media(max-width:680px){.spec-list{grid-template-columns:1fr}}
 
   /* Interactive aerial map */
-  .imap-wrap{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#0d0c09;margin-top:14px}
+  .imap-wrap{position:relative;touch-action:pan-y;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#0d0c09;margin-top:14px}
   .imap-wrap img.base{width:100%;display:block}
   .imap-svg{display:none}
   /* numbered markers */
@@ -505,7 +509,18 @@
     .sec-head{margin-bottom:36px}
     .sec-head h2{font-size:clamp(1.6rem,5vw,2.2rem)}
   }
+
+  @media print{
+    header,.hero,.pano,.imap-wrap,.imap-legend,.imap-hint,.imap-mobile-info,
+    .pano-badge,.pano-hint,.map-wrap,.fav,.btn,.nav-cta,footer,.contact{display:none!important}
+    .sec,.benefits{page-break-inside:avoid}
+    body{font-size:11pt;color:#000}
+    .card,.ben,.feat,.fp,.feature{box-shadow:none;border:1px solid #ccc}
+  }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"RealEstateListing","name":"Projekt Harichovce — 3 nové 4-izbové rodinné domy","description":"Tri nízkoenergetické 4-izbové bungalovy na vlastných oplotených pozemkoch v Harichovciach. Certifikát A, smart home, rekuperácia.","url":"https://www.alphareality.sk/","numberOfItems":3,"offers":[{"@type":"Offer","price":"297000","priceCurrency":"EUR","availability":"https://schema.org/InStock","name":"Alpha 1 — 461 m²"},{"@type":"Offer","price":"297000","priceCurrency":"EUR","availability":"https://schema.org/InStock","name":"Alpha 2 — 439 m²"},{"@type":"Offer","price":"297000","priceCurrency":"EUR","availability":"https://schema.org/InStock","name":"Alpha 3 — 590 m²"}],"address":{"@type":"PostalAddress","addressLocality":"Harichovce","addressRegion":"Košický kraj","addressCountry":"SK"},"geo":{"@type":"GeoCoordinates","latitude":"48.957132","longitude":"20.587647"}}
+</script>
 </head>
 <body>
 <div class="bg-atmos"></div>
@@ -513,7 +528,7 @@
 
 <header id="hdr">
   <div class="wrap nav">
-    <a href="#" class="brand"><img src="assets/logo.png" alt="Alpha Reality"></a>
+    <a href="#domy" class="brand"><img loading="lazy" src="assets/logo.png" alt="Alpha Reality"></a>
     <nav class="nav-links" id="navlinks">
       <a href="#domy">Domy</a>
       <a href="#prehliadka">Virtuálna prehliadka</a>
@@ -527,7 +542,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><img src="assets/aerial-three.jpg" alt="Letecký pohľad na tri novostavby rodinných domov v Harichovciach"></div>
+  <div class="hero-bg"><img loading="lazy" src="assets/aerial-three.jpg" alt="Letecký pohľad na tri novostavby rodinných domov v Harichovciach"></div>
   <div class="wrap hero-inner">
     <div class="reveal in"><span class="eyebrow"><span class="dot"></span>Exkluzívne · Harichovce, okres Spišská Nová Ves</span></div>
     <h1 class="reveal in" style="transition-delay:.08s">Tri 4-izbové domy, v ktorých <em>začne nový príbeh</em></h1>
@@ -564,15 +579,15 @@
         <div class="showcase-cap"><h3 id="capTitle">Celý areál z vtáčej perspektívy</h3><p id="capText">Tri domy na vlastných oplotených pozemkoch s príjazdovou cestou a parkovaním, lemované poľami na okraji obce.</p></div>
       </div>
       <div class="thumbs" id="thumbs">
-        <div class="thumb active" data-img="assets/aerial-three.jpg" data-t="Celý areál z vtáčej perspektívy" data-d="Tri samostatne stojace domy na vlastných oplotených pozemkoch, lemované poľami na okraji obce Harichovce."><img src="assets/aerial-three.jpg" alt="Letecký pohľad na tri domy"></div>
-        <div class="thumb" data-img="assets/aerial-pair.jpg" data-t="Valbová strecha a krytý vstup" data-d="Všetky domy majú elegantnú valbovú strechu z betónovej škridly, bielu fasádu a krytý vstup s dreveným obkladom."><img src="assets/aerial-pair.jpg" alt="Detail domu s valbovou strechou"></div>
-        <div class="thumb" data-img="assets/street-white-car.jpg" data-t="Príjazd a parkovanie" data-d="Spevnená príjazdová cesta a parkovacie státie pri každom dome, pozemky oddelené murovaným oplotením."><img src="assets/street-white-car.jpg" alt="Pohľad na príjazd a parkovanie"></div>
-        <div class="thumb" data-img="assets/street-red-car.jpg" data-t="Pohľad z ulice" data-d="Čistá biela fasáda, drevené detaily pri vstupe a upravená predzáhradka s okrasnými trávami."><img src="assets/street-red-car.jpg" alt="Pohľad na dom z ulice"></div>
-        <div class="thumb" data-img="assets/entry-wood.jpg" data-t="Vstup s dreveným obkladom" data-d="Detail vstupu — drevený lamelový obklad, veľké okná s izolačným trojsklom a spevnená plocha pred vstupom."><img src="assets/entry-wood.jpg" alt="Vstup s dreveným obkladom"></div>
-        <div class="thumb" data-img="assets/garden-pergola.jpg" data-t="Záhrada a krytá terasa" data-d="Krytá terasa s presahom strechy — ideálne miesto na rodinné posedenie v súkromí oplotenej záhrady."><img src="assets/garden-pergola.jpg" alt="Záhrada a krytá terasa"></div>
-        <div class="thumb" data-img="assets/garden-back.jpg" data-t="Záhradná strana domu" data-d="Veľké presklené plochy orientované do záhrady prinášajú do interiéru množstvo svetla a výhľad do zelene."><img src="assets/garden-back.jpg" alt="Záhradná strana domu"></div>
-        <div class="thumb" data-img="assets/garden-side.jpg" data-t="Súkromie a zeleň" data-d="Murované oplotenie po obvode pozemku zaisťuje súkromie. Pozemok je rovinatý a slnečný."><img src="assets/garden-side.jpg" alt="Bočný pohľad na dom a záhradu"></div>
-        <div class="thumb" data-img="assets/floorplan.png" data-t="Pôdorys · 4-izbová dispozícia" data-d="Premyslená dispozícia bez zbytočných metrov — spálňa so šatníkom, 2× detská izba, ob. hala s jedálňou a kuchyňou, 2× kúpeľňa, technická miestnosť."><img src="assets/floorplan.png" alt="Pôdorys domu"></div>
+        <div class="thumb active" data-img="assets/aerial-three.jpg" data-t="Celý areál z vtáčej perspektívy" data-d="Tri samostatne stojace domy na vlastných oplotených pozemkoch, lemované poľami na okraji obce Harichovce."><img loading="lazy" src="assets/aerial-three.jpg" alt="Letecký pohľad na tri domy"></div>
+        <div class="thumb" data-img="assets/aerial-pair.jpg" data-t="Valbová strecha a krytý vstup" data-d="Všetky domy majú elegantnú valbovú strechu z betónovej škridly, bielu fasádu a krytý vstup s dreveným obkladom."><img loading="lazy" src="assets/aerial-pair.jpg" alt="Detail domu s valbovou strechou"></div>
+        <div class="thumb" data-img="assets/street-white-car.jpg" data-t="Príjazd a parkovanie" data-d="Spevnená príjazdová cesta a parkovacie státie pri každom dome, pozemky oddelené murovaným oplotením."><img loading="lazy" src="assets/street-white-car.jpg" alt="Pohľad na príjazd a parkovanie"></div>
+        <div class="thumb" data-img="assets/street-red-car.jpg" data-t="Pohľad z ulice" data-d="Čistá biela fasáda, drevené detaily pri vstupe a upravená predzáhradka s okrasnými trávami."><img loading="lazy" src="assets/street-red-car.jpg" alt="Pohľad na dom z ulice"></div>
+        <div class="thumb" data-img="assets/entry-wood.jpg" data-t="Vstup s dreveným obkladom" data-d="Detail vstupu — drevený lamelový obklad, veľké okná s izolačným trojsklom a spevnená plocha pred vstupom."><img loading="lazy" src="assets/entry-wood.jpg" alt="Vstup s dreveným obkladom"></div>
+        <div class="thumb" data-img="assets/garden-pergola.jpg" data-t="Záhrada a krytá terasa" data-d="Krytá terasa s presahom strechy — ideálne miesto na rodinné posedenie v súkromí oplotenej záhrady."><img loading="lazy" src="assets/garden-pergola.jpg" alt="Záhrada a krytá terasa"></div>
+        <div class="thumb" data-img="assets/garden-back.jpg" data-t="Záhradná strana domu" data-d="Veľké presklené plochy orientované do záhrady prinášajú do interiéru množstvo svetla a výhľad do zelene."><img loading="lazy" src="assets/garden-back.jpg" alt="Záhradná strana domu"></div>
+        <div class="thumb" data-img="assets/garden-side.jpg" data-t="Súkromie a zeleň" data-d="Murované oplotenie po obvode pozemku zaisťuje súkromie. Pozemok je rovinatý a slnečný."><img loading="lazy" src="assets/garden-side.jpg" alt="Bočný pohľad na dom a záhradu"></div>
+        <div class="thumb" data-img="assets/floorplan.png" data-t="Pôdorys · 4-izbová dispozícia" data-d="Premyslená dispozícia bez zbytočných metrov — spálňa so šatníkom, 2× detská izba, ob. hala s jedálňou a kuchyňou, 2× kúpeľňa, technická miestnosť."><img loading="lazy" src="assets/floorplan.png" alt="Pôdorys domu"></div>
       </div>
     </div>
 
@@ -580,7 +595,7 @@
     <div class="props">
       <article class="card reveal">
         <div class="card-media">
-          <img src="assets/aerial-pair.jpg" alt="Dom Alpha 1">
+          <img loading="lazy" src="assets/aerial-pair.jpg" alt="Dom Alpha 1">
           <span class="badge">Alpha 1 · Exkluzívne</span>
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
@@ -600,7 +615,7 @@
 
       <article class="card reveal" style="transition-delay:.1s">
         <div class="card-media">
-          <img src="assets/street-white-car.jpg" alt="Dom Alpha 2">
+          <img loading="lazy" src="assets/street-white-car.jpg" alt="Dom Alpha 2">
           <span class="badge">Alpha 2 · Exkluzívne</span>
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
@@ -620,7 +635,7 @@
 
       <article class="card reveal" style="transition-delay:.2s">
         <div class="card-media">
-          <img src="assets/street-red-car.jpg" alt="Dom Alpha 3">
+          <img loading="lazy" src="assets/street-red-car.jpg" alt="Dom Alpha 3">
           <span class="badge">Alpha 3 · Exkluzívne</span>
           <button class="fav" aria-label="Obľúbené"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></button>
         </div>
@@ -708,7 +723,7 @@
 
     <!-- FLOOR PLAN FEATURE -->
     <div class="fp reveal">
-      <div class="fp-img"><img src="assets/floorplan.png" alt="Pôdorys 4-izbového domu" onclick="openLb(slides.length-1)"></div>
+      <div class="fp-img"><img loading="lazy" src="assets/floorplan.png" alt="Pôdorys 4-izbového domu" onclick="openLb(slides.length-1)"></div>
       <div class="fp-body">
         <div class="eyebrow ghost"><span class="dot"></span>Dispozícia</div>
         <h3>Žiadne zbytočné m² — <em>moderná funkčná dispozícia</em> s dôrazom na detail</h3>
@@ -738,7 +753,7 @@
     </div>
 
     <div class="imap-wrap reveal" id="imapWrap">
-      <img class="base" src="assets/aerial-three.jpg" alt="Letecký plán troch domov">
+      <img loading="lazy" class="base" src="assets/aerial-three.jpg" alt="Letecký plán troch domov">
       <svg class="imap-svg" viewBox="0 0 100 56" preserveAspectRatio="none">
         <polygon data-house="Alpha 1" points="13,41 28,26 40,34 25,52"></polygon>
         <polygon data-house="Alpha 2" points="28,34 44,19 56,27 40,45"></polygon>
@@ -762,7 +777,7 @@
 
     <!-- Virtual tour -->
     <div class="feature reveal" id="prehliadka">
-      <div class="fimg"><img src="assets/street-white-car.jpg" alt="Vizualizácia domu Harichovce"></div>
+      <div class="fimg"><img loading="lazy" src="assets/street-white-car.jpg" alt="Vizualizácia domu Harichovce"></div>
       <div class="fbody">
         <div class="eyebrow ghost"><span class="dot"></span>3D virtuálna prehliadka</div>
         <h3>Prejdite si dom z pohodlia gauča</h3>
@@ -922,7 +937,7 @@
         <h2>Páči sa vám niektorý dom? Ozvite sa.</h2>
         <p>Napíšte nám, o ktorý dom máte záujem, a my sa vám ozveme s termínom obhliadky. Radi poradíme aj s financovaním.</p>
         <div class="agent">
-          <div class="av"><img src="assets/martin.jpg" alt="Martin Augustiňák, RSc."></div>
+          <div class="av"><img loading="lazy" src="assets/martin.jpg" alt="Martin Augustiňák, RSc."></div>
           <div>
             <div class="nm">Martin Augustiňák, RSc.</div>
             <div class="rl">konateľ Alpha Reality · 16 rokov praxe v realitách</div>
@@ -958,7 +973,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand"><img src="assets/logo.png" alt="Alpha Reality"></div>
+        <div class="foot-brand"><img loading="lazy" src="assets/logo.png" alt="Alpha Reality"></div>
         <p>Realitná kancelária pre náročných. Sprostredkovanie predaja, prenájmu a výkup nehnuteľností v okresoch Spišská Nová Ves a Levoča.</p>
       </div>
       <div class="foot-col">
@@ -994,7 +1009,7 @@
   <button class="lb-close" id="lbClose" aria-label="Zavrieť"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
   <div class="lb-stage">
     <button class="lb-btn lb-prev" id="lbPrev" aria-label="Predošlá"><svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <img id="lbImg" src="" alt="">
+    <img loading="lazy" id="lbImg" src="" alt="">
     <button class="lb-btn lb-next" id="lbNext" aria-label="Ďalšia"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
   <div class="lb-cap"><b id="lbTitle"></b><span id="lbText"></span></div>
