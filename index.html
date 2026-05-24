@@ -220,11 +220,28 @@
   .imap-marker .ping{position:absolute;top:50%;left:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:2px solid var(--gold);animation:pingA 2s ease-out infinite}
   @keyframes pingA{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.2);opacity:0}}
   .imap-marker.on .circle{background:#fff;color:var(--gold-deep);border-color:var(--gold)}
-  /* info card popup */
-  .imap-card{position:absolute;z-index:5;transform:translate(-50%,calc(-100% - 28px));background:rgba(255,253,248,.98);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);min-width:190px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
-  .imap-card.show{opacity:1;transform:translate(-50%,calc(-100% - 34px))}
-  .imap-card::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);border:8px solid transparent;border-top-color:rgba(255,253,248,.98)}
+  /* info card popup — two modes: .below (card under marker) and .above (card over marker) */
+  .imap-card{position:absolute;z-index:5;background:rgba(255,253,248,.98);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);min-width:180px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap}
+  .imap-card.below{transform:translate(-50%,16px)}
+  .imap-card.below.show{opacity:1;transform:translate(-50%,20px)}
+  .imap-card.below::after{content:"";position:absolute;left:50%;top:-7px;transform:translateX(-50%);border:7px solid transparent;border-bottom-color:rgba(255,253,248,.98)}
+  .imap-card.above{transform:translate(-50%,calc(-100% - 16px))}
+  .imap-card.above.show{opacity:1;transform:translate(-50%,calc(-100% - 20px))}
+  .imap-card.above::after{content:"";position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);border:7px solid transparent;border-top-color:rgba(255,253,248,.98)}
   .imap-card h4{font-family:var(--display);font-weight:600;font-size:1.15rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  @media(max-width:680px){
+    .imap-card{display:none!important}
+    .imap-marker .circle{width:34px;height:34px;font-size:.95rem}
+    .imap-marker .ping{width:34px;height:34px;margin:-17px 0 0 -17px}
+  }
+  /* Mobile info panel below map */
+  .imap-mobile-info{display:none;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-top:14px;box-shadow:var(--shadow-sm);text-align:center;animation:lbpop .3s ease}
+  .imap-mobile-info h4{font-family:var(--display);font-weight:600;font-size:1.15rem;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .imap-mobile-info .av{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#2e7d4f;background:#e3f3e9;border-radius:6px;padding:3px 8px}
+  .imap-mobile-info .av .d{width:7px;height:7px;border-radius:50%;background:#2e7d4f}
+  .imap-mobile-info .det{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px;font-size:.9rem;color:var(--ink-soft)}
+  .imap-mobile-info .det b{color:var(--ink);font-weight:700}
+  @media(max-width:680px){.imap-mobile-info.show{display:block}}
   .imap-card .av{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#2e7d4f;background:#e3f3e9;border-radius:6px;padding:3px 8px}
   .imap-card .av .d{width:7px;height:7px;border-radius:50%;background:#2e7d4f}
   .imap-card .det{display:flex;flex-direction:column;gap:5px;font-size:.85rem;color:var(--ink-soft)}
@@ -577,7 +594,7 @@
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>461 m² pozemok</span>
           </div>
           <div class="tags"><span class="tag-free"><span class="d"></span>Voľný</span><span class="tag">Certifikát A</span><span class="tag">Smart home</span></div>
-          <div class="card-foot"><div class="price">Cena dohodou<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </div>
       </article>
 
@@ -597,7 +614,7 @@
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>439 m² pozemok</span>
           </div>
           <div class="tags"><span class="tag-free"><span class="d"></span>Voľný</span><span class="tag">Certifikát A</span><span class="tag">Smart home</span></div>
-          <div class="card-foot"><div class="price">Cena dohodou<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </div>
       </article>
 
@@ -617,7 +634,7 @@
             <span class="spec"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V8l8-4 8 4v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20h16M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>590 m² pozemok</span>
           </div>
           <div class="tags"><span class="tag-free"><span class="d"></span>Voľný</span><span class="tag">Certifikát A</span><span class="tag">Smart home</span></div>
-          <div class="card-foot"><div class="price">Cena dohodou<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          <div class="card-foot"><div class="price">297 000 €<small>vrátane prevodu vlastníctva</small></div><a href="#kontakt" class="card-link">Mám záujem<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         </div>
       </article>
     </div>
@@ -734,6 +751,7 @@
       <!-- info card -->
       <div class="imap-card" id="imapCard"></div>
     </div>
+    <div class="imap-mobile-info" id="imapMobile"></div>
 
     <div class="imap-legend" id="imapLegend">
       <button data-h="Alpha 1"><span class="badge-n">1</span>Alpha 1 <small>· 461 m²</small></button>
@@ -1036,6 +1054,7 @@
     const polys=[...wrap.querySelectorAll('polygon')];
     const markers=[...wrap.querySelectorAll('.imap-marker')];
     const card=document.getElementById('imapCard');
+    const mobilePanel=document.getElementById('imapMobile');
     const legendBtns=[...document.querySelectorAll('#imapLegend button')];
     const DATA={
       'Alpha 1':{n:'1',plot:'461 m²',pos:'Pri vjazde do areálu'},
@@ -1050,14 +1069,25 @@
       const mk=markers.find(m=>m.dataset.house===name);
       const d=DATA[name];
       if(mk&&d){
-        card.style.left=mk.style.left;
-        card.style.top=mk.style.top;
+        // Desktop overlay card
+        let l=parseFloat(mk.style.left);
+        let t=parseFloat(mk.style.top);
+        if(l<25)l=25; if(l>75)l=75;
+        card.style.left=l+'%';
+        if(t<55){
+          card.style.top=t+'%';
+          card.className='imap-card show below';
+        } else {
+          card.style.top=t+'%';
+          card.className='imap-card show above';
+        }
         card.innerHTML='<h4>'+name+' <span class="av"><span class="d"></span>Voľný</span></h4>'+
           '<div class="det"><div class="l"><span>Pozemok</span><b>'+d.plot+'</b></div>'+
-          '<div class="l"><span>Úžitková</span><b>93,36 m²</b></div>'+
-          '<div class="l"><span>Dispozícia</span><b>4-izbový</b></div>'+
-          '<div class="l"><span>Poloha</span><b>'+d.pos+'</b></div></div>';
-        card.classList.add('show');
+          '<div class="l"><span>4-izbový · '+d.pos+'</span></div></div>';
+        // Mobile panel below map
+        mobilePanel.innerHTML='<h4>'+name+' <span class="av"><span class="d"></span>Voľný</span></h4>'+
+          '<div class="det"><span>Pozemok <b>'+d.plot+'</b></span><span>Úžitková <b>93,36 m²</b></span><span>4-izbový</span><span>'+d.pos+'</span></div>';
+        mobilePanel.classList.add('show');
       }
     }
     function clear(){
@@ -1066,6 +1096,7 @@
       markers.forEach(m=>m.classList.remove('on'));
       legendBtns.forEach(b=>b.classList.remove('on'));
       card.classList.remove('show');
+      mobilePanel.classList.remove('show');
     }
     markers.forEach(m=>{
       m.addEventListener('mouseenter',()=>{if(!locked)show(m.dataset.house)});
