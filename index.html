@@ -531,7 +531,6 @@
     <a href="#domy" class="brand"><img loading="lazy" src="assets/logo.png" alt="Alpha Reality"></a>
     <nav class="nav-links" id="navlinks">
       <a href="#domy">Domy</a>
-      <a href="#prehliadka">Virtuálna prehliadka</a>
       <a href="#vyhody">Financovanie</a>
       <a href="#lokalita">Lokalita</a>
       <a href="#kontakt">Kontakt</a>
@@ -775,7 +774,8 @@
     </div>
     <p class="imap-hint"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l4 16 2.5-7 7-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> Tip: ťuknite na číslo 1, 2 alebo 3 priamo v pláne.</p>
 
-    <!-- Virtual tour -->
+    <!-- Virtual tour — VYPNUTÉ, zapnúť neskôr -->
+    <!--
     <div class="feature reveal" id="prehliadka">
       <div class="fimg"><img loading="lazy" src="assets/street-white-car.jpg" alt="Vizualizácia domu Harichovce"></div>
       <div class="fbody">
@@ -785,6 +785,7 @@
         <a class="btn btn-gold vr-cta" href="https://my.matterport.com/show/?m=f26HkceUBii" target="_blank" rel="noopener"><span class="ring"></span>Spustiť virtuálnu prehliadku</a>
       </div>
     </div>
+    -->
 
     <!-- 360 PANORAMA -->
     <div class="sec-head reveal" style="margin-top:80px">
@@ -1144,6 +1145,8 @@
         hfov:100,
         minHfov:50,
         maxHfov:120,
+        yaw:80,
+        pitch:-5,
         compass:false,
         backgroundColor:[13,12,9]
       });
